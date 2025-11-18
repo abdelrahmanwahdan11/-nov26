@@ -12,6 +12,7 @@ import 'package:audiobook_ebooks/features/book_detail/book_detail_screen.dart';
 import 'package:audiobook_ebooks/features/comparison/comparison_screen.dart';
 import 'package:audiobook_ebooks/features/home/daily_brief_screen.dart';
 import 'package:audiobook_ebooks/features/home/immersion_room_screen.dart';
+import 'package:audiobook_ebooks/features/library/highlights_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
@@ -119,6 +120,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     _DailyBriefTeaser(loc: loc),
                     const SizedBox(height: 12),
                     _ImmersionPreview(loc: loc),
+                    const SizedBox(height: 12),
+                    _HighlightsPeek(loc: loc),
                     const SizedBox(height: 20),
                     _sectionTitle(context, 'Good Morning'),
                     SizedBox(
@@ -560,6 +563,78 @@ class _ImmersionPreview extends StatelessWidget {
         ),
       ),
     ).animate().fadeIn(duration: 300.ms).slide(begin: const Offset(0, .05));
+  }
+}
+
+class _HighlightsPeek extends StatelessWidget {
+  const _HighlightsPeek({required this.loc});
+  final AppLocalizations loc;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final highlight = DummyData.highlights.first;
+    return InkWell(
+      borderRadius: BorderRadius.circular(AppConstants.cardRadius),
+      onTap: () => Navigator.of(context).push(
+        MaterialPageRoute(builder: (_) => const HighlightsScreen()),
+      ),
+      child: Container(
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(AppConstants.cardRadius),
+          color: theme.colorScheme.surface,
+          border: Border.all(color: theme.colorScheme.primary.withOpacity(.08)),
+          boxShadow: [
+            BoxShadow(
+              color: theme.colorScheme.primary.withOpacity(.08),
+              blurRadius: 16,
+              offset: const Offset(0, 8),
+            )
+          ],
+        ),
+        child: Row(
+          children: [
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    loc.translate('highlights'),
+                    style: theme.textTheme.titleMedium
+                        ?.copyWith(fontWeight: FontWeight.w700),
+                  ),
+                  const SizedBox(height: 6),
+                  Text(
+                    highlight.snippet,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  const SizedBox(height: 10),
+                  Wrap(
+                    spacing: 6,
+                    children: [
+                      _Chip(text: highlight.mood),
+                      _Chip(text: loc.translate('viewHighlights')),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(width: 12),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(14),
+              child: Image.network(
+                highlight.coverUrl,
+                width: 90,
+                height: 100,
+                fit: BoxFit.cover,
+              ),
+            ).animate().shimmer(duration: 1100.ms, delay: 140.ms),
+          ],
+        ),
+      ),
+    ).animate().fadeIn(duration: 250.ms).slide(begin: const Offset(0, .04));
   }
 }
 

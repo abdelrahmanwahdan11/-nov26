@@ -6,10 +6,12 @@ import 'package:audiobook_ebooks/data/models/chapter.dart';
 import 'package:audiobook_ebooks/data/models/curated_collection.dart';
 import 'package:audiobook_ebooks/data/models/download_item.dart';
 import 'package:audiobook_ebooks/data/models/daily_brief.dart';
+import 'package:audiobook_ebooks/data/models/coach_tip.dart';
 import 'package:audiobook_ebooks/data/models/immersion_mix.dart';
 import 'package:audiobook_ebooks/data/models/journey_event.dart';
 import 'package:audiobook_ebooks/data/models/listening_club.dart';
 import 'package:audiobook_ebooks/data/models/live_session.dart';
+import 'package:audiobook_ebooks/data/models/highlight_note.dart';
 import 'package:audiobook_ebooks/data/models/reading_stat.dart';
 import 'package:audiobook_ebooks/data/models/review.dart';
 
@@ -369,5 +371,69 @@ class DummyData {
       durationLabel: '6m sampler',
       mood: 'Discover',
     ),
+  ];
+
+  static const highlights = [
+    HighlightNote(
+      id: 'h1',
+      bookTitle: 'Fictional Odyssey',
+      chapterTitle: 'Chapter 3 · Whispered horizons',
+      snippet: '"Hold steady—storms show who we are when no one is watching."',
+      mood: 'Focus',
+      coverUrl: 'https://picsum.photos/seed/highlight1/400/400',
+      timeLabel: 'Today · 7:30 AM',
+      tags: ['Reflection', 'Share-ready', 'Mark for recap'],
+    ),
+    HighlightNote(
+      id: 'h2',
+      bookTitle: 'Nightfall Narratives',
+      chapterTitle: 'Chapter 8 · Low ember glow',
+      snippet: '"Rest is not idle; it is how the next idea learns to breathe."',
+      mood: 'Calm',
+      coverUrl: 'https://picsum.photos/seed/highlight2/400/400',
+      timeLabel: 'Yesterday · 10:12 PM',
+      tags: ['Sleep', 'Save for later'],
+    ),
+    HighlightNote(
+      id: 'h3',
+      bookTitle: 'Mindful Mornings',
+      chapterTitle: 'Segment 2 · Breathing room',
+      snippet: '"Small breaths stack into courage when the day speeds up."',
+      mood: 'Renew',
+      coverUrl: 'https://picsum.photos/seed/highlight3/400/400',
+      timeLabel: '2 days ago',
+      tags: ['Share', 'Clip to daily brief'],
+    ),
+  ];
+
+  static const coachTips = [
+    CoachTip(
+      id: 'c1',
+      title: 'Tame busy mornings',
+      subtitle: 'Blend a 6m calm mix with a 4m story hook to keep energy steady.',
+      actionLabel: 'Build stack',
+      illustrationUrl: 'https://picsum.photos/seed/coach1/900/600',
+    ),
+    CoachTip(
+      id: 'c2',
+      title: 'Protect your streak',
+      subtitle: 'Schedule a 12m night drift with slow fades before you unplug.',
+      actionLabel: 'Schedule drift',
+      illustrationUrl: 'https://picsum.photos/seed/coach2/900/600',
+    ),
+    CoachTip(
+      id: 'c3',
+      title: 'Learn + Recall',
+      subtitle: 'Pair a 90s recap with a fresh chapter to anchor the memory.',
+      actionLabel: 'Add recap',
+      illustrationUrl: 'https://picsum.photos/seed/coach3/900/600',
+    ),
+  ];
+
+  static const microTasks = [
+    'Mark a highlight for tonight\'s recap',
+    'Share a calm quote with your club',
+    'Pin a focus brief to the planner',
+    'Log 5 minutes to keep the streak glowing',
   ];
 }

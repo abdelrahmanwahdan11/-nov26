@@ -8,6 +8,7 @@ import 'package:audiobook_ebooks/features/profile/journey_screen.dart';
 import 'package:audiobook_ebooks/features/profile/progress_hub_screen.dart';
 import 'package:audiobook_ebooks/features/profile/reading_stats_screen.dart';
 import 'package:audiobook_ebooks/features/profile/sessions_planner_screen.dart';
+import 'package:audiobook_ebooks/features/profile/coach_screen.dart';
 import 'package:audiobook_ebooks/features/settings/settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -93,6 +94,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
             onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute(builder: (_) => const JourneyScreen()),
+              );
+            },
+          ),
+          _ProfileAction(
+            title: loc.translate('coachTitle'),
+            icon: Icons.auto_fix_high,
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (_) => const CoachScreen()),
               );
             },
           ),

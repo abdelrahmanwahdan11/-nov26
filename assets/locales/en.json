@@ -87,5 +87,16 @@
   "sessionPlanner": "Session planner",
   "planYourDay": "Plan your day",
   "planYourDayCopy": "Pin sunrise, midday, and night anchors to stay on rhythm.",
-  "autoFill": "Auto-fill"
+  "autoFill": "Auto-fill",
+  "highlights": "Highlights",
+  "highlightsHero": "Keep your favorite lines within reach",
+  "highlightsSub": "Clip quotes, tag moods, and pin them to daily briefs or planners.",
+  "highlightsTeaser": "Clip lines you love, then send them to a brief or share with a club.",
+  "viewHighlights": "View highlights",
+  "pinnedToPlanner": "Pinned to planner",
+  "all": "All",
+  "coachTitle": "Coach",
+  "coachHero": "Gentle routines tuned to your focus",
+  "coachSub": "Pick a coach recipe, then add quick micro-actions to keep momentum.",
+  "microActions": "Micro-actions"
 }
