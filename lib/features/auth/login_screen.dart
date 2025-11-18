@@ -3,9 +3,17 @@ import 'package:audiobook_ebooks/core/localization/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key, required this.authController, required this.onSuccess});
+  const LoginScreen({
+    super.key,
+    required this.authController,
+    required this.onSuccess,
+    this.onForgot,
+    this.onRegister,
+  });
   final AuthController authController;
   final VoidCallback onSuccess;
+  final VoidCallback? onForgot;
+  final VoidCallback? onRegister;
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -60,6 +68,19 @@ class _LoginScreenState extends State<LoginScreen> {
                   }
                 },
                 child: Text(loc.translate('login')),
+              ),
+              Row(
+                children: [
+                  TextButton(
+                    onPressed: widget.onForgot,
+                    child: Text(loc.translate('forgotPassword')),
+                  ),
+                  const Spacer(),
+                  TextButton(
+                    onPressed: widget.onRegister,
+                    child: Text(loc.translate('register')),
+                  )
+                ],
               ),
               TextButton(
                 onPressed: widget.onSuccess,

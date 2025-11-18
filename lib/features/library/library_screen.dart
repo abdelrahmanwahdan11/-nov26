@@ -3,6 +3,7 @@ import 'package:audiobook_ebooks/core/controllers/books_controller.dart';
 import 'package:audiobook_ebooks/core/controllers/navigation_controller.dart';
 import 'package:audiobook_ebooks/core/localization/app_localizations.dart';
 import 'package:audiobook_ebooks/data/dummy/dummy_data.dart';
+import 'package:audiobook_ebooks/features/library/downloads_center_screen.dart';
 import 'package:audiobook_ebooks/features/library/highlights_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -72,6 +73,15 @@ class _LibraryScreenState extends State<LibraryScreen>
       appBar: AppBar(
         title: Text(loc.translate('library')),
         actions: [
+          IconButton(
+            icon: const Icon(Icons.download_done_outlined),
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (_) => const DownloadsCenterScreen()),
+              );
+            },
+            tooltip: loc.translate('downloadsCenter'),
+          ).animate().fadeIn(duration: 200.ms).scale(begin: .9, curve: Curves.easeOut),
           IconButton(
             icon: const Icon(Icons.push_pin_outlined),
             onPressed: () {

@@ -2,9 +2,11 @@ import 'package:audiobook_ebooks/core/controllers/goals_controller.dart';
 import 'package:audiobook_ebooks/core/controllers/navigation_controller.dart';
 import 'package:audiobook_ebooks/core/controllers/theme_controller.dart';
 import 'package:audiobook_ebooks/core/localization/app_localizations.dart';
+import 'package:audiobook_ebooks/features/library/downloads_center_screen.dart';
 import 'package:audiobook_ebooks/features/profile/clubs_screen.dart';
 import 'package:audiobook_ebooks/features/profile/goals_screen.dart';
 import 'package:audiobook_ebooks/features/profile/journey_screen.dart';
+import 'package:audiobook_ebooks/features/profile/achievements_showcase_screen.dart';
 import 'package:audiobook_ebooks/features/profile/progress_hub_screen.dart';
 import 'package:audiobook_ebooks/features/profile/reading_stats_screen.dart';
 import 'package:audiobook_ebooks/features/profile/sessions_planner_screen.dart';
@@ -78,6 +80,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
             },
           ),
           _ProfileAction(
+            title: loc.translate('achievementsCabinet'),
+            icon: Icons.workspace_premium,
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (_) => const AchievementsShowcaseScreen()),
+              );
+            },
+          ),
+          _ProfileAction(
             title: loc.translate('goals'),
             icon: Icons.track_changes,
             onTap: () {
@@ -130,6 +141,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
             onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute(builder: (_) => const ProgressHubScreen()),
+              );
+            },
+          ),
+          _ProfileAction(
+            title: loc.translate('downloadsCenter'),
+            icon: Icons.offline_pin,
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (_) => const DownloadsCenterScreen()),
               );
             },
           ),

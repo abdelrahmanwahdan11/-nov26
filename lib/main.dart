@@ -5,6 +5,7 @@ import 'package:audiobook_ebooks/core/controllers/goals_controller.dart';
 import 'package:audiobook_ebooks/core/controllers/theme_controller.dart';
 import 'package:audiobook_ebooks/core/localization/app_localizations.dart';
 import 'package:audiobook_ebooks/core/theme/app_theme.dart';
+import 'package:audiobook_ebooks/features/auth/auth_selector_screen.dart';
 import 'package:audiobook_ebooks/features/onboarding/onboarding_screen.dart';
 import 'package:audiobook_ebooks/features/home/home_shell.dart';
 import 'package:flutter/material.dart';
@@ -28,6 +29,7 @@ class _HearAndReadAppState extends State<HearAndReadApp> {
   final BooksController _booksController = BooksController();
   final ComparisonController _comparisonController = ComparisonController();
   final GoalsController _goalsController = GoalsController();
+  final GlobalKey<NavigatorState> _navKey = GlobalKey<NavigatorState>();
 
   @override
   void initState() {
@@ -53,6 +55,7 @@ class _HearAndReadAppState extends State<HearAndReadApp> {
       valueListenable: _themeController.preferences,
       builder: (context, prefs, _) {
         return MaterialApp(
+          navigatorKey: _navKey,
           debugShowCheckedModeBanner: false,
           title: 'Hear & Read',
           theme: AppTheme.light(prefs.primaryColorSeed),
@@ -74,22 +77,35 @@ class _HearAndReadAppState extends State<HearAndReadApp> {
             );
           },
           home: OnboardingScreen(
-            onStart: () {
-              Navigator.of(context).pushReplacement(
-                MaterialPageRoute(
-                  builder: (_) => HomeShell(
-                    themeController: _themeController,
-                    authController: _authController,
-                    booksController: _booksController,
-                    comparisonController: _comparisonController,
-                    goalsController: _goalsController,
-                  ),
-                ),
-              );
-            },
+            onStart: _openAuth,
           ),
         );
       },
+    );
+  }
+
+  void _openAuth() {
+    _navKey.currentState?.pushReplacement(
+      MaterialPageRoute(
+        builder: (_) => AuthSelectorScreen(
+          authController: _authController,
+          onAuthenticated: _openHome,
+        ),
+      ),
+    );
+  }
+
+  void _openHome() {
+    _navKey.currentState?.pushReplacement(
+      MaterialPageRoute(
+        builder: (_) => HomeShell(
+          themeController: _themeController,
+          authController: _authController,
+          booksController: _booksController,
+          comparisonController: _comparisonController,
+          goalsController: _goalsController,
+        ),
+      ),
     );
   }
 }
