@@ -1,6 +1,7 @@
 import 'package:audiobook_ebooks/core/controllers/auth_controller.dart';
 import 'package:audiobook_ebooks/core/controllers/books_controller.dart';
 import 'package:audiobook_ebooks/core/controllers/comparison_controller.dart';
+import 'package:audiobook_ebooks/core/controllers/goals_controller.dart';
 import 'package:audiobook_ebooks/core/controllers/theme_controller.dart';
 import 'package:audiobook_ebooks/core/localization/app_localizations.dart';
 import 'package:audiobook_ebooks/features/catalog/catalog_screen.dart';
@@ -18,12 +19,14 @@ class HomeShell extends StatefulWidget {
     required this.authController,
     required this.booksController,
     required this.comparisonController,
+    required this.goalsController,
   });
 
   final ThemeController themeController;
   final AuthController authController;
   final BooksController booksController;
   final ComparisonController comparisonController;
+  final GoalsController goalsController;
 
   @override
   State<HomeShell> createState() => _HomeShellState();
@@ -40,13 +43,17 @@ class _HomeShellState extends State<HomeShell> {
       HomeScreen(
         booksController: widget.booksController,
         comparisonController: widget.comparisonController,
+        goalsController: widget.goalsController,
       ),
       CatalogScreen(
         booksController: widget.booksController,
         comparisonController: widget.comparisonController,
       ),
       LibraryScreen(booksController: widget.booksController),
-      ProfileScreen(themeController: widget.themeController),
+      ProfileScreen(
+        themeController: widget.themeController,
+        goalsController: widget.goalsController,
+      ),
     ];
   }
 

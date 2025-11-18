@@ -1,6 +1,7 @@
 import 'package:audiobook_ebooks/core/constants/app_constants.dart';
 import 'package:audiobook_ebooks/core/controllers/books_controller.dart';
 import 'package:audiobook_ebooks/core/controllers/comparison_controller.dart';
+import 'package:audiobook_ebooks/core/controllers/goals_controller.dart';
 import 'package:audiobook_ebooks/core/localization/app_localizations.dart';
 import 'package:audiobook_ebooks/core/widgets/ai_info_button.dart';
 import 'package:audiobook_ebooks/core/widgets/skeleton.dart';
@@ -16,10 +17,12 @@ class HomeScreen extends StatelessWidget {
     super.key,
     required this.booksController,
     required this.comparisonController,
+    required this.goalsController,
   });
 
   final BooksController booksController;
   final ComparisonController comparisonController;
+  final GoalsController goalsController;
 
   @override
   Widget build(BuildContext context) {
@@ -66,6 +69,8 @@ class HomeScreen extends StatelessWidget {
                 return ListView(
                   padding: const EdgeInsets.all(AppConstants.padding),
                   children: [
+                    _FocusCard(goalsController: goalsController),
+                    const SizedBox(height: 20),
                     _sectionTitle(context, 'Good Morning'),
                     SizedBox(
                       height: 260,
@@ -307,6 +312,116 @@ class _MiniTile extends StatelessWidget {
       title: Text(book.title),
       subtitle: Text('${book.author} · ${book.genre}'),
       trailing: const Icon(Icons.chevron_right),
+    );
+  }
+}
+
+class _FocusCard extends StatelessWidget {
+  const _FocusCard({required this.goalsController});
+  final GoalsController goalsController;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final loc = AppLocalizations.of(context);
+    return ValueListenableBuilder(
+      valueListenable: goalsController.state,
+      builder: (context, state, _) {
+        final progress = (state.todayMinutes / state.targetMinutes).clamp(0, 1.0);
+        return Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                theme.colorScheme.primary.withOpacity(.14),
+                theme.colorScheme.primary.withOpacity(.05),
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+            borderRadius: BorderRadius.circular(AppConstants.cardRadius),
+            boxShadow: [
+              BoxShadow(
+                color: theme.colorScheme.primary.withOpacity(.12),
+                blurRadius: 16,
+                offset: const Offset(0, 12),
+              ),
+            ],
+          ),
+          child: Row(
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      loc.translate('dailyFocus'),
+                      style: theme.textTheme.titleMedium
+                          ?.copyWith(fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(height: 6),
+                    Text(
+                      loc.translate('dailyGoalSub'),
+                      style: theme.textTheme.bodyMedium,
+                    ),
+                    const SizedBox(height: 12),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(12),
+                      child: LinearProgressIndicator(
+                        value: progress,
+                        minHeight: 10,
+                      ),
+                    ),
+                    const SizedBox(height: 6),
+                    Text(
+                      '${state.todayMinutes} / ${state.targetMinutes} ${loc.translate('minutes')}',
+                      style: theme.textTheme.labelLarge,
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(width: 12),
+              Column(
+                children: [
+                  ElevatedButton.icon(
+                    onPressed: () => goalsController.logMinutes(10),
+                    icon: const Icon(Icons.flash_on),
+                    label: Text(loc.translate('logTen')),
+                  ),
+                  const SizedBox(height: 8),
+                  OutlinedButton(
+                    onPressed: () => Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (_) => _FocusDetail(goalsController: goalsController),
+                      ),
+                    ),
+                    child: Text(loc.translate('adjustGoal')),
+                  ),
+                ],
+              )
+            ],
+          ),
+        ).animate().fadeIn(duration: 260.ms).slide(begin: const Offset(0, .05));
+      },
+    );
+  }
+}
+
+class _FocusDetail extends StatelessWidget {
+  const _FocusDetail({required this.goalsController});
+  final GoalsController goalsController;
+
+  @override
+  Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context);
+    return Scaffold(
+      appBar: AppBar(title: Text(loc.translate('dailyFocus'))),
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(AppConstants.padding),
+          child: _FocusCard(goalsController: goalsController),
+        ),
+      ),
     );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:audiobook_ebooks/core/controllers/auth_controller.dart';
 import 'package:audiobook_ebooks/core/controllers/books_controller.dart';
 import 'package:audiobook_ebooks/core/controllers/comparison_controller.dart';
+import 'package:audiobook_ebooks/core/controllers/goals_controller.dart';
 import 'package:audiobook_ebooks/core/controllers/theme_controller.dart';
 import 'package:audiobook_ebooks/core/localization/app_localizations.dart';
 import 'package:audiobook_ebooks/core/theme/app_theme.dart';
@@ -26,12 +27,14 @@ class _HearAndReadAppState extends State<HearAndReadApp> {
   final AuthController _authController = AuthController();
   final BooksController _booksController = BooksController();
   final ComparisonController _comparisonController = ComparisonController();
+  final GoalsController _goalsController = GoalsController();
 
   @override
   void initState() {
     super.initState();
     _themeController.load();
     _booksController.loadInitial();
+    _goalsController.load();
   }
 
   @override
@@ -69,6 +72,7 @@ class _HearAndReadAppState extends State<HearAndReadApp> {
                     authController: _authController,
                     booksController: _booksController,
                     comparisonController: _comparisonController,
+                    goalsController: _goalsController,
                   ),
                 ),
               );

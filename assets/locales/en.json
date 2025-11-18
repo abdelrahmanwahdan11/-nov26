@@ -46,5 +46,21 @@
   "noInProgress": "No in-progress titles yet",
   "noFavorites": "No favorites yet",
   "keepListening": "Keep listening",
-  "complete": "complete"
+  "complete": "complete",
+  "goals": "Goals & Focus",
+  "dailyFocus": "Daily focus goal",
+  "dailyGoalSub": "Boost focus with quick micro-sessions.",
+  "minutes": "min",
+  "logTen": "Log +10m",
+  "logFifteen": "Log +15m",
+  "adjustGoal": "Adjust goal",
+  "goalHeroCopy": "Build momentum with consistent listening.",
+  "goalAdjustCopy": "Slide to update the daily target for your streak.",
+  "reminder": "Smart reminder",
+  "reminderCopy": "Gentle nudge when you\"re halfway to the goal.",
+  "focusMode": "Focus mode",
+  "focusCopy": "Reduce distractions with calmer colors and haptics.",
+  "resetToday": "Reset today",
+  "searchHint": "Search books, authors, or moods...",
+  "collections": "Curated collections"
 }

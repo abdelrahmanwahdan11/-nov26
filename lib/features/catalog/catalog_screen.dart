@@ -2,10 +2,12 @@ import 'package:audiobook_ebooks/core/constants/app_constants.dart';
 import 'package:audiobook_ebooks/core/controllers/books_controller.dart';
 import 'package:audiobook_ebooks/core/controllers/comparison_controller.dart';
 import 'package:audiobook_ebooks/core/controllers/search_controller.dart' as controllers;
+import 'package:audiobook_ebooks/core/localization/app_localizations.dart';
 import 'package:audiobook_ebooks/core/widgets/ai_info_button.dart';
 import 'package:audiobook_ebooks/core/widgets/skeleton.dart';
 import 'package:audiobook_ebooks/data/models/book.dart';
 import 'package:audiobook_ebooks/features/book_detail/book_detail_screen.dart';
+import 'package:audiobook_ebooks/features/catalog/collections_screen.dart';
 import 'package:flutter/material.dart';
 
 class CatalogScreen extends StatefulWidget {
@@ -46,11 +48,12 @@ class _CatalogScreenState extends State<CatalogScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context);
     return Scaffold(
       appBar: AppBar(
         title: TextField(
-          decoration: const InputDecoration(
-            hintText: 'Search books... ',
+          decoration: InputDecoration(
+            hintText: loc.translate('searchHint'),
             border: InputBorder.none,
           ),
           onChanged: (value) => _searchController.updateQuery(
@@ -58,7 +61,16 @@ class _CatalogScreenState extends State<CatalogScreen> {
             widget.booksController.books.value,
           ),
         ),
-        actions: const [AiInfoButton()],
+        actions: [
+          IconButton(
+            tooltip: loc.translate('collections'),
+            onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute(builder: (_) => const CollectionsScreen()),
+            ),
+            icon: const Icon(Icons.auto_awesome),
+          ),
+          const AiInfoButton()
+        ],
       ),
       body: ValueListenableBuilder(
         valueListenable: widget.booksController.isLoading,

@@ -1,5 +1,7 @@
+import 'package:audiobook_ebooks/core/controllers/goals_controller.dart';
 import 'package:audiobook_ebooks/core/controllers/theme_controller.dart';
 import 'package:audiobook_ebooks/core/localization/app_localizations.dart';
+import 'package:audiobook_ebooks/features/profile/goals_screen.dart';
 import 'package:audiobook_ebooks/features/profile/progress_hub_screen.dart';
 import 'package:audiobook_ebooks/features/profile/reading_stats_screen.dart';
 import 'package:audiobook_ebooks/features/settings/settings_screen.dart';
@@ -7,8 +9,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
 class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({super.key, required this.themeController});
+  const ProfileScreen({
+    super.key,
+    required this.themeController,
+    required this.goalsController,
+  });
   final ThemeController themeController;
+  final GoalsController goalsController;
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +40,17 @@ class ProfileScreen extends StatelessWidget {
               onTap: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(builder: (_) => const ReadingStatsScreen()),
+                );
+              },
+            ),
+            _ProfileAction(
+              title: loc.translate('goals'),
+              icon: Icons.track_changes,
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => GoalsScreen(goalsController: goalsController),
+                  ),
                 );
               },
             ),

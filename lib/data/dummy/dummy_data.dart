@@ -2,6 +2,7 @@ import 'package:audiobook_ebooks/data/models/achievement.dart';
 import 'package:audiobook_ebooks/data/models/app_notification.dart';
 import 'package:audiobook_ebooks/data/models/book.dart';
 import 'package:audiobook_ebooks/data/models/chapter.dart';
+import 'package:audiobook_ebooks/data/models/curated_collection.dart';
 import 'package:audiobook_ebooks/data/models/download_item.dart';
 import 'package:audiobook_ebooks/data/models/reading_stat.dart';
 import 'package:audiobook_ebooks/data/models/review.dart';
@@ -136,5 +137,29 @@ class DummyData {
     ReadingStat(label: 'Weekly time', value: '3h 20m', progress: 0.65),
     ReadingStat(label: 'Chapters finished', value: '18', progress: 0.72),
     ReadingStat(label: 'Focus goal', value: '80%', progress: 0.8),
+  ];
+
+  static const curatedCollections = [
+    CuratedCollection(
+      id: 'mindful',
+      title: 'Mindful Mornings',
+      subtitle: 'Slow-burn stories to ease you into the day.',
+      coverUrl: 'https://picsum.photos/seed/collection1/800/600',
+      tags: ['Calm', 'Inspiring', 'Soft voices'],
+    ),
+    CuratedCollection(
+      id: 'night',
+      title: 'Nightfall Narratives',
+      subtitle: 'Cozy listens to drift off with.',
+      coverUrl: 'https://picsum.photos/seed/collection2/800/600',
+      tags: ['Sleep', 'Ambient', 'Short form'],
+    ),
+    CuratedCollection(
+      id: 'deep',
+      title: 'Deep Focus',
+      subtitle: 'Instrumental and low-dialogue picks.',
+      coverUrl: 'https://picsum.photos/seed/collection3/800/600',
+      tags: ['Productivity', 'Minimal', 'Loopable'],
+    ),
   ];
 }
