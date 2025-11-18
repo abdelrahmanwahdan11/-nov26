@@ -78,5 +78,14 @@
   "immersionRoom": "غرفة الانغماس",
   "immersionSubtitle": "رحلات قصيرة ونبضات تنفس ومعاينات هادئة لتجهيز استماعك القادم.",
   "startFlow": "ابدأ التدفق",
-  "calmBreaths": "أنفاس هادئة"
+  "calmBreaths": "أنفاس هادئة",
+  "dailyBrief": "ملخص اليوم",
+  "dailyBriefHeadline": "اركب موجات سريعة تقود يومك",
+  "dailyBriefCopy": "ثلاث كتل مصغرة من السرد والتنفس والتأمل لتوازن يومك.",
+  "threeBlocks": "3 جلسات موجهة",
+  "freshPicks": "اختيارات جديدة",
+  "sessionPlanner": "مخطط الجلسات",
+  "planYourDay": "خطط يومك",
+  "planYourDayCopy": "ثبّت نقاط الصباح والظهيرة والمساء لتحافظ على الإيقاع.",
+  "autoFill": "تعبئة تلقائية"
 }

@@ -2,6 +2,7 @@ import 'package:audiobook_ebooks/core/constants/app_constants.dart';
 import 'package:audiobook_ebooks/core/controllers/books_controller.dart';
 import 'package:audiobook_ebooks/core/controllers/comparison_controller.dart';
 import 'package:audiobook_ebooks/core/controllers/goals_controller.dart';
+import 'package:audiobook_ebooks/core/controllers/navigation_controller.dart';
 import 'package:audiobook_ebooks/core/localization/app_localizations.dart';
 import 'package:audiobook_ebooks/core/widgets/ai_info_button.dart';
 import 'package:audiobook_ebooks/core/widgets/skeleton.dart';
@@ -9,21 +10,62 @@ import 'package:audiobook_ebooks/data/dummy/dummy_data.dart';
 import 'package:audiobook_ebooks/data/models/book.dart';
 import 'package:audiobook_ebooks/features/book_detail/book_detail_screen.dart';
 import 'package:audiobook_ebooks/features/comparison/comparison_screen.dart';
+import 'package:audiobook_ebooks/features/home/daily_brief_screen.dart';
 import 'package:audiobook_ebooks/features/home/immersion_room_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({
     super.key,
     required this.booksController,
     required this.comparisonController,
     required this.goalsController,
+    this.navController,
+    this.tabIndex = 0,
   });
 
   final BooksController booksController;
   final ComparisonController comparisonController;
   final GoalsController goalsController;
+  final NavigationController? navController;
+  final int tabIndex;
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final ScrollController _scroll = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+    widget.navController?.registerReselect(
+      widget.tabIndex,
+      () => _scrollToTop(animated: true),
+    );
+  }
+
+  @override
+  void dispose() {
+    widget.navController?.unregisterReselect(widget.tabIndex);
+    _scroll.dispose();
+    super.dispose();
+  }
+
+  void _scrollToTop({bool animated = false}) {
+    if (!_scroll.hasClients) return;
+    if (animated) {
+      _scroll.animateTo(
+        0,
+        duration: const Duration(milliseconds: 350),
+        curve: Curves.easeOutCubic,
+      );
+    } else {
+      _scroll.jumpTo(0);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,24 +95,28 @@ class HomeScreen extends StatelessWidget {
         },
       ),
       body: RefreshIndicator(
-        onRefresh: () async => booksController.refresh(),
+        onRefresh: () async => widget.booksController.refresh(),
         child: ValueListenableBuilder(
-          valueListenable: booksController.isLoading,
+          valueListenable: widget.booksController.isLoading,
           builder: (context, loading, _) {
             if (loading) {
               return ListView.builder(
                 padding: const EdgeInsets.all(AppConstants.padding),
+                controller: _scroll,
                 itemCount: 3,
                 itemBuilder: (_, __) => const SkeletonListTile(),
               );
             }
             return ValueListenableBuilder(
-              valueListenable: booksController.books,
+              valueListenable: widget.booksController.books,
               builder: (context, books, _) {
                 return ListView(
                   padding: const EdgeInsets.all(AppConstants.padding),
+                  controller: _scroll,
                   children: [
-                    _FocusCard(goalsController: goalsController),
+                    _FocusCard(goalsController: widget.goalsController),
+                    const SizedBox(height: 12),
+                    _DailyBriefTeaser(loc: loc),
                     const SizedBox(height: 12),
                     _ImmersionPreview(loc: loc),
                     const SizedBox(height: 20),
@@ -87,8 +133,9 @@ class HomeScreen extends StatelessWidget {
                             book: book,
                             onOpen: () => _openDetail(context, book),
                             onSelectComparison: () =>
-                                comparisonController.toggle(book),
-                            selected: comparisonController.isSelected(book),
+                                widget.comparisonController.toggle(book),
+                            selected:
+                                widget.comparisonController.isSelected(book),
                           );
                         },
                       ),
@@ -407,6 +454,46 @@ class _FocusCard extends StatelessWidget {
         ).animate().fadeIn(duration: 260.ms).slide(begin: const Offset(0, .05));
       },
     );
+  }
+}
+
+class _DailyBriefTeaser extends StatelessWidget {
+  const _DailyBriefTeaser({required this.loc});
+  final AppLocalizations loc;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Card(
+      elevation: 10,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(AppConstants.cardRadius),
+      ),
+      child: ListTile(
+        leading: Container(
+          width: 52,
+          height: 52,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(16),
+            gradient: LinearGradient(
+              colors: [
+                theme.colorScheme.primary,
+                theme.colorScheme.secondary,
+              ],
+            ),
+          ),
+          child: const Icon(Icons.calendar_today, color: Colors.white),
+        ),
+        title: Text(loc.translate('dailyBrief')),
+        subtitle: Text(loc.translate('dailyBriefHeadline')),
+        trailing: Icon(Icons.arrow_forward, color: theme.colorScheme.primary),
+        onTap: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (_) => const DailyBriefScreen()),
+          );
+        },
+      ),
+    ).animate().fadeIn(duration: 240.ms).slide(begin: const Offset(0, .05));
   }
 }
 

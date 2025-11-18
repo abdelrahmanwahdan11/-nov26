@@ -46,15 +46,25 @@ class _HomeShellState extends State<HomeShell> {
         booksController: widget.booksController,
         comparisonController: widget.comparisonController,
         goalsController: widget.goalsController,
+        navController: _navController,
+        tabIndex: 0,
       ),
       CatalogScreen(
         booksController: widget.booksController,
         comparisonController: widget.comparisonController,
+        navController: _navController,
+        tabIndex: 1,
       ),
-      LibraryScreen(booksController: widget.booksController),
+      LibraryScreen(
+        booksController: widget.booksController,
+        navController: _navController,
+        tabIndex: 2,
+      ),
       ProfileScreen(
         themeController: widget.themeController,
         goalsController: widget.goalsController,
+        navController: _navController,
+        tabIndex: 3,
       ),
     ];
   }
@@ -83,7 +93,7 @@ class _HomeShellState extends State<HomeShell> {
         final nav = isWide
             ? NavigationRail(
                 selectedIndex: index,
-                onDestinationSelected: (i) => _navController.setIndex(i),
+                onDestinationSelected: (i) => _navController.tapIndex(i),
                 labelType: NavigationRailLabelType.all,
                 destinations: [
                   for (final item in items)
@@ -95,7 +105,7 @@ class _HomeShellState extends State<HomeShell> {
               )
             : BottomNavigationBar(
                 currentIndex: index,
-                onTap: (i) => _navController.setIndex(i),
+                onTap: (i) => _navController.tapIndex(i),
                 items: [
                   for (final item in items)
                     BottomNavigationBarItem(

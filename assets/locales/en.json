@@ -78,5 +78,14 @@
   "immersionRoom": "Immersion room",
   "immersionSubtitle": "Micro journeys, breathing cues, and soft previews to prime your next listen.",
   "startFlow": "Start flow",
-  "calmBreaths": "Calm breaths"
+  "calmBreaths": "Calm breaths",
+  "dailyBrief": "Daily brief",
+  "dailyBriefHeadline": "Stack quick listens to steer your day",
+  "dailyBriefCopy": "Three curated micro blocks that combine narration, breath, and reflection.",
+  "threeBlocks": "3 guided blocks",
+  "freshPicks": "Fresh picks",
+  "sessionPlanner": "Session planner",
+  "planYourDay": "Plan your day",
+  "planYourDayCopy": "Pin sunrise, midday, and night anchors to stay on rhythm.",
+  "autoFill": "Auto-fill"
 }

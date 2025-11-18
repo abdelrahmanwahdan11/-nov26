@@ -1,6 +1,7 @@
 import 'package:audiobook_ebooks/core/constants/app_constants.dart';
 import 'package:audiobook_ebooks/core/controllers/books_controller.dart';
 import 'package:audiobook_ebooks/core/controllers/comparison_controller.dart';
+import 'package:audiobook_ebooks/core/controllers/navigation_controller.dart';
 import 'package:audiobook_ebooks/core/controllers/search_controller.dart' as controllers;
 import 'package:audiobook_ebooks/core/localization/app_localizations.dart';
 import 'package:audiobook_ebooks/core/widgets/ai_info_button.dart';
@@ -16,9 +17,13 @@ class CatalogScreen extends StatefulWidget {
     super.key,
     required this.booksController,
     required this.comparisonController,
+    this.navController,
+    this.tabIndex = 1,
   });
   final BooksController booksController;
   final ComparisonController comparisonController;
+  final NavigationController? navController;
+  final int tabIndex;
 
   @override
   State<CatalogScreen> createState() => _CatalogScreenState();
@@ -33,12 +38,30 @@ class _CatalogScreenState extends State<CatalogScreen> {
   void initState() {
     super.initState();
     _scroll.addListener(_onScroll);
+    widget.navController?.registerReselect(
+      widget.tabIndex,
+      () => _scrollToTop(animated: true),
+    );
   }
 
   @override
   void dispose() {
+    widget.navController?.unregisterReselect(widget.tabIndex);
     _scroll.dispose();
     super.dispose();
+  }
+
+  void _scrollToTop({bool animated = false}) {
+    if (!_scroll.hasClients) return;
+    if (animated) {
+      _scroll.animateTo(
+        0,
+        duration: const Duration(milliseconds: 320),
+        curve: Curves.easeOutCubic,
+      );
+    } else {
+      _scroll.jumpTo(0);
+    }
   }
 
   void _onScroll() {

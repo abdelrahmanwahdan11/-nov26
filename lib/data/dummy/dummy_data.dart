@@ -5,9 +5,11 @@ import 'package:audiobook_ebooks/data/models/book.dart';
 import 'package:audiobook_ebooks/data/models/chapter.dart';
 import 'package:audiobook_ebooks/data/models/curated_collection.dart';
 import 'package:audiobook_ebooks/data/models/download_item.dart';
+import 'package:audiobook_ebooks/data/models/daily_brief.dart';
 import 'package:audiobook_ebooks/data/models/immersion_mix.dart';
 import 'package:audiobook_ebooks/data/models/journey_event.dart';
 import 'package:audiobook_ebooks/data/models/listening_club.dart';
+import 'package:audiobook_ebooks/data/models/live_session.dart';
 import 'package:audiobook_ebooks/data/models/reading_stat.dart';
 import 'package:audiobook_ebooks/data/models/review.dart';
 
@@ -309,6 +311,63 @@ class DummyData {
       minutes: 6,
       coverUrl: 'https://picsum.photos/seed/immersion4/900/600',
       tags: ['Snappy', 'Narrated', 'Try-outs'],
+    ),
+  ];
+
+  static const liveSessions = [
+    LiveSession(
+      id: 'sunrise-flow',
+      title: 'Sunrise Flow',
+      host: 'Lina Qureshi',
+      timeLabel: 'Today · 6:45 AM',
+      mood: 'Calm focus',
+      lengthLabel: '25m',
+      coverUrl: 'https://picsum.photos/seed/session1/900/600',
+    ),
+    LiveSession(
+      id: 'midday-burst',
+      title: 'Midday Burst',
+      host: 'Amir Habib',
+      timeLabel: 'Today · 12:10 PM',
+      mood: 'Energy',
+      lengthLabel: '18m',
+      coverUrl: 'https://picsum.photos/seed/session2/900/600',
+    ),
+    LiveSession(
+      id: 'night-reset',
+      title: 'Night Reset',
+      host: 'Solana Reef',
+      timeLabel: 'Tonight · 9:15 PM',
+      mood: 'Sleep wind-down',
+      lengthLabel: '30m',
+      coverUrl: 'https://picsum.photos/seed/session3/900/600',
+    ),
+  ];
+
+  static const dailyBriefs = [
+    DailyBrief(
+      id: 'pulse',
+      headline: 'Pulse through the morning',
+      subtitle: 'Stack 12 minutes of audio sprints for a sharper focus arc.',
+      coverUrl: 'https://picsum.photos/seed/brief1/900/600',
+      durationLabel: '12m micro',
+      mood: 'Focus',
+    ),
+    DailyBrief(
+      id: 'soothe',
+      headline: 'Soothe + Stretch',
+      subtitle: 'Pair calm narration with light stretching cues.',
+      coverUrl: 'https://picsum.photos/seed/brief2/900/600',
+      durationLabel: '15m calm',
+      mood: 'Calm',
+    ),
+    DailyBrief(
+      id: 'discover',
+      headline: 'Discover a new voice',
+      subtitle: 'Listen to three 90-second hooks across genres.',
+      coverUrl: 'https://picsum.photos/seed/brief3/900/600',
+      durationLabel: '6m sampler',
+      mood: 'Discover',
     ),
   ];
 }

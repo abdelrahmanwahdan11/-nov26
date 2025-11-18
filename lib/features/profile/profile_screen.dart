@@ -1,4 +1,5 @@
 import 'package:audiobook_ebooks/core/controllers/goals_controller.dart';
+import 'package:audiobook_ebooks/core/controllers/navigation_controller.dart';
 import 'package:audiobook_ebooks/core/controllers/theme_controller.dart';
 import 'package:audiobook_ebooks/core/localization/app_localizations.dart';
 import 'package:audiobook_ebooks/features/profile/clubs_screen.dart';
@@ -6,96 +7,134 @@ import 'package:audiobook_ebooks/features/profile/goals_screen.dart';
 import 'package:audiobook_ebooks/features/profile/journey_screen.dart';
 import 'package:audiobook_ebooks/features/profile/progress_hub_screen.dart';
 import 'package:audiobook_ebooks/features/profile/reading_stats_screen.dart';
+import 'package:audiobook_ebooks/features/profile/sessions_planner_screen.dart';
 import 'package:audiobook_ebooks/features/settings/settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({
     super.key,
     required this.themeController,
     required this.goalsController,
+    this.navController,
+    this.tabIndex = 3,
   });
   final ThemeController themeController;
   final GoalsController goalsController;
+  final NavigationController? navController;
+  final int tabIndex;
+
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  final ScrollController _scroll = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+    widget.navController
+        ?.registerReselect(widget.tabIndex, () => _scroll.animateTo(
+              0,
+              duration: const Duration(milliseconds: 320),
+              curve: Curves.easeOutCubic,
+            ));
+  }
+
+  @override
+  void dispose() {
+    widget.navController?.unregisterReselect(widget.tabIndex);
+    _scroll.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context);
     return Scaffold(
       appBar: AppBar(title: Text(loc.translate('profile'))),
-      body: Padding(
+      body: ListView(
+        controller: _scroll,
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            ListTile(
-              leading: const CircleAvatar(
-                backgroundImage: NetworkImage('https://picsum.photos/seed/profile/80/80'),
-              ),
-              title: const Text('Jane Listener'),
-              subtitle: const Text('jane@example.com'),
+        children: [
+          ListTile(
+            leading: const CircleAvatar(
+              backgroundImage: NetworkImage('https://picsum.photos/seed/profile/80/80'),
             ),
-            const SizedBox(height: 12),
-            _ProfileAction(
-              title: loc.translate('readingStats'),
-              icon: Icons.auto_graph,
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(builder: (_) => const ReadingStatsScreen()),
-                );
-              },
-            ),
-            _ProfileAction(
-              title: loc.translate('goals'),
-              icon: Icons.track_changes,
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (_) => GoalsScreen(goalsController: goalsController),
-                  ),
-                );
-              },
-            ),
-            _ProfileAction(
-              title: loc.translate('journey'),
-              icon: Icons.timeline,
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(builder: (_) => const JourneyScreen()),
-                );
-              },
-            ),
-            _ProfileAction(
-              title: loc.translate('clubs'),
-              icon: Icons.podcasts,
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(builder: (_) => const ClubsScreen()),
-                );
-              },
-            ),
-            _ProfileAction(
-              title: loc.translate('progressCenter'),
-              icon: Icons.emoji_events,
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(builder: (_) => const ProgressHubScreen()),
-                );
-              },
-            ),
-            _ProfileAction(
-              title: loc.translate('settings'),
-              icon: Icons.tune,
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (_) => SettingsScreen(themeController: themeController),
-                  ),
-                );
-              },
-            ),
-          ],
-        ),
+            title: const Text('Jane Listener'),
+            subtitle: const Text('jane@example.com'),
+          ),
+          const SizedBox(height: 12),
+          _ProfileAction(
+            title: loc.translate('readingStats'),
+            icon: Icons.auto_graph,
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (_) => const ReadingStatsScreen()),
+              );
+            },
+          ),
+          _ProfileAction(
+            title: loc.translate('goals'),
+            icon: Icons.track_changes,
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (_) => GoalsScreen(goalsController: widget.goalsController),
+                ),
+              );
+            },
+          ),
+          _ProfileAction(
+            title: loc.translate('journey'),
+            icon: Icons.timeline,
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (_) => const JourneyScreen()),
+              );
+            },
+          ),
+          _ProfileAction(
+            title: loc.translate('clubs'),
+            icon: Icons.podcasts,
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (_) => const ClubsScreen()),
+              );
+            },
+          ),
+          _ProfileAction(
+            title: loc.translate('sessionPlanner'),
+            icon: Icons.event_available,
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (_) => const SessionsPlannerScreen()),
+              );
+            },
+          ),
+          _ProfileAction(
+            title: loc.translate('progressCenter'),
+            icon: Icons.emoji_events,
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (_) => const ProgressHubScreen()),
+              );
+            },
+          ),
+          _ProfileAction(
+            title: loc.translate('settings'),
+            icon: Icons.tune,
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (_) => SettingsScreen(themeController: widget.themeController),
+                ),
+              );
+            },
+          ),
+        ],
       ),
     );
   }

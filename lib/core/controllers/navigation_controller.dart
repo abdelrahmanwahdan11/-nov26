@@ -8,6 +8,23 @@ class NavigationController {
 
   final ValueNotifier<int> index;
   final PageController pageController;
+  final Map<int, VoidCallback> _reselectCallbacks = {};
+
+  void registerReselect(int tab, VoidCallback callback) {
+    _reselectCallbacks[tab] = callback;
+  }
+
+  void unregisterReselect(int tab) {
+    _reselectCallbacks.remove(tab);
+  }
+
+  void tapIndex(int value) {
+    if (value == index.value) {
+      _reselectCallbacks[value]?.call();
+    } else {
+      setIndex(value);
+    }
+  }
 
   void setIndex(int value, {bool animate = true}) {
     if (value == index.value) return;
@@ -30,6 +47,7 @@ class NavigationController {
   }
 
   void dispose() {
+    _reselectCallbacks.clear();
     index.dispose();
     pageController.dispose();
   }
