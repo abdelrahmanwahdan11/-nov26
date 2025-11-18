@@ -1,6 +1,7 @@
 import 'package:audiobook_ebooks/core/controllers/goals_controller.dart';
 import 'package:audiobook_ebooks/core/controllers/theme_controller.dart';
 import 'package:audiobook_ebooks/core/localization/app_localizations.dart';
+import 'package:audiobook_ebooks/features/profile/clubs_screen.dart';
 import 'package:audiobook_ebooks/features/profile/goals_screen.dart';
 import 'package:audiobook_ebooks/features/profile/journey_screen.dart';
 import 'package:audiobook_ebooks/features/profile/progress_hub_screen.dart';
@@ -61,6 +62,15 @@ class ProfileScreen extends StatelessWidget {
               onTap: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(builder: (_) => const JourneyScreen()),
+                );
+              },
+            ),
+            _ProfileAction(
+              title: loc.translate('clubs'),
+              icon: Icons.podcasts,
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (_) => const ClubsScreen()),
                 );
               },
             ),

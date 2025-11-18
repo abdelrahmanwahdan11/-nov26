@@ -5,7 +5,9 @@ import 'package:audiobook_ebooks/data/models/book.dart';
 import 'package:audiobook_ebooks/data/models/chapter.dart';
 import 'package:audiobook_ebooks/data/models/curated_collection.dart';
 import 'package:audiobook_ebooks/data/models/download_item.dart';
+import 'package:audiobook_ebooks/data/models/immersion_mix.dart';
 import 'package:audiobook_ebooks/data/models/journey_event.dart';
+import 'package:audiobook_ebooks/data/models/listening_club.dart';
 import 'package:audiobook_ebooks/data/models/reading_stat.dart';
 import 'package:audiobook_ebooks/data/models/review.dart';
 
@@ -238,6 +240,75 @@ class DummyData {
         'Chill, minimalist pacing',
         'Popular "Breathe Deeper" series',
       ],
+    ),
+  ];
+
+  static const listeningClubs = [
+    ListeningClub(
+      id: 'quiet-club',
+      title: 'Quiet Night Club',
+      host: 'Lina Qureshi',
+      timeLabel: 'Today · 9:00 PM',
+      members: 264,
+      coverUrl: 'https://picsum.photos/seed/club1/900/600',
+      mood: 'Calm focus',
+    ),
+    ListeningClub(
+      id: 'history-lounge',
+      title: 'History Lounge',
+      host: 'Amir Habib',
+      timeLabel: 'Tomorrow · 7:30 PM',
+      members: 412,
+      coverUrl: 'https://picsum.photos/seed/club2/900/600',
+      mood: 'Story circle',
+    ),
+    ListeningClub(
+      id: 'sunrise-readers',
+      title: 'Sunrise Readers',
+      host: 'Solana Reef',
+      timeLabel: 'Saturday · 8:00 AM',
+      members: 188,
+      coverUrl: 'https://picsum.photos/seed/club3/900/600',
+      mood: 'Soft mornings',
+    ),
+  ];
+
+  static const immersions = [
+    ImmersionMix(
+      id: 'breathe',
+      title: 'Breathe & Begin',
+      subtitle: '5-minute slow entry with hush vocals.',
+      mood: 'Calm',
+      minutes: 5,
+      coverUrl: 'https://picsum.photos/seed/immersion1/900/600',
+      tags: ['Breath', 'Soothing', 'Warm light'],
+    ),
+    ImmersionMix(
+      id: 'deep-work',
+      title: 'Deep Work Pulse',
+      subtitle: 'Gentle pulses that sync to your focus goal.',
+      mood: 'Focus',
+      minutes: 18,
+      coverUrl: 'https://picsum.photos/seed/immersion2/900/600',
+      tags: ['Minimal', 'Looped', 'No vocals'],
+    ),
+    ImmersionMix(
+      id: 'night-chill',
+      title: 'Night Chill Drift',
+      subtitle: 'Low-tone hums and distant rainfall.',
+      mood: 'Sleep',
+      minutes: 12,
+      coverUrl: 'https://picsum.photos/seed/immersion3/900/600',
+      tags: ['Rain', 'Cozy', 'Dim'],
+    ),
+    ImmersionMix(
+      id: 'micro-story',
+      title: 'Micro Story Sparks',
+      subtitle: 'Three 90-second hooks to pick your next book.',
+      mood: 'Discover',
+      minutes: 6,
+      coverUrl: 'https://picsum.photos/seed/immersion4/900/600',
+      tags: ['Snappy', 'Narrated', 'Try-outs'],
     ),
   ];
 }

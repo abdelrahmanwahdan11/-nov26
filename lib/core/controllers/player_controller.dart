@@ -43,5 +43,8 @@ class PlayerController {
 
   void dispose() {
     _timer?.cancel();
+    isPlaying.dispose();
+    position.dispose();
+    total.dispose();
   }
 }

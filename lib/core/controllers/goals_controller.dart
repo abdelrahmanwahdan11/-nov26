@@ -51,4 +51,8 @@ class GoalsController {
     await prefs.setBool('goal_reminder', state.value.reminderEnabled);
     await prefs.setBool('goal_focus', state.value.focusMode);
   }
+
+  void dispose() {
+    state.dispose();
+  }
 }

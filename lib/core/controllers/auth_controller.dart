@@ -18,4 +18,9 @@ class AuthController {
     isLoggedIn.value = false;
     userEmail.value = null;
   }
+
+  void dispose() {
+    isLoggedIn.dispose();
+    userEmail.dispose();
+  }
 }

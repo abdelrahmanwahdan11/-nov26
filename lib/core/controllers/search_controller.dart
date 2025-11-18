@@ -16,4 +16,9 @@ class SearchController {
             book.description.toLowerCase().contains(lower))
         .toList();
   }
+
+  void dispose() {
+    query.dispose();
+    results.dispose();
+  }
 }

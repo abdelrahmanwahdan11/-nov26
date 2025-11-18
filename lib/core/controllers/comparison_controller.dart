@@ -16,4 +16,8 @@ class ComparisonController {
 
   bool isSelected(Book book) =>
       selected.value.any((element) => element.id == book.id);
+
+  void dispose() {
+    selected.dispose();
+  }
 }

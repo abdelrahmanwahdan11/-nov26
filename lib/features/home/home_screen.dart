@@ -9,6 +9,7 @@ import 'package:audiobook_ebooks/data/dummy/dummy_data.dart';
 import 'package:audiobook_ebooks/data/models/book.dart';
 import 'package:audiobook_ebooks/features/book_detail/book_detail_screen.dart';
 import 'package:audiobook_ebooks/features/comparison/comparison_screen.dart';
+import 'package:audiobook_ebooks/features/home/immersion_room_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
@@ -70,6 +71,8 @@ class HomeScreen extends StatelessWidget {
                   padding: const EdgeInsets.all(AppConstants.padding),
                   children: [
                     _FocusCard(goalsController: goalsController),
+                    const SizedBox(height: 12),
+                    _ImmersionPreview(loc: loc),
                     const SizedBox(height: 20),
                     _sectionTitle(context, 'Good Morning'),
                     SizedBox(
@@ -403,6 +406,95 @@ class _FocusCard extends StatelessWidget {
           ),
         ).animate().fadeIn(duration: 260.ms).slide(begin: const Offset(0, .05));
       },
+    );
+  }
+}
+
+class _ImmersionPreview extends StatelessWidget {
+  const _ImmersionPreview({required this.loc});
+  final AppLocalizations loc;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final hero = DummyData.immersions.first;
+    return InkWell(
+      borderRadius: BorderRadius.circular(AppConstants.cardRadius),
+      onTap: () {
+        Navigator.of(context).push(
+          MaterialPageRoute(builder: (_) => const ImmersionRoomScreen()),
+        );
+      },
+      child: Container(
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(AppConstants.cardRadius),
+          color: theme.colorScheme.secondaryContainer.withOpacity(.6),
+        ),
+        child: Row(
+          children: [
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    loc.translate('immersionRoom'),
+                    style: theme.textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                  const SizedBox(height: 6),
+                  Text(
+                    hero.subtitle,
+                    style: theme.textTheme.bodySmall,
+                  ),
+                  const SizedBox(height: 10),
+                  Row(
+                    children: [
+                      _Chip(text: hero.mood),
+                      const SizedBox(width: 8),
+                      _Chip(text: '${hero.minutes} ${loc.translate('minutes')}'),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(width: 12),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(18),
+              child: Image.network(
+                hero.coverUrl,
+                width: 100,
+                height: 110,
+                fit: BoxFit.cover,
+              ),
+            ).animate().shimmer(duration: 900.ms, delay: 100.ms),
+          ],
+        ),
+      ),
+    ).animate().fadeIn(duration: 300.ms).slide(begin: const Offset(0, .05));
+  }
+}
+
+class _Chip extends StatelessWidget {
+  const _Chip({required this.text});
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+      decoration: BoxDecoration(
+        color: theme.colorScheme.primary.withOpacity(.1),
+        borderRadius: BorderRadius.circular(999),
+      ),
+      child: Text(
+        text,
+        style: theme.textTheme.labelMedium?.copyWith(
+          color: theme.colorScheme.primary,
+        ),
+      ),
     );
   }
 }

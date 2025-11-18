@@ -69,5 +69,14 @@
   "authorSpotlight": "Author spotlight",
   "featuredHighlights": "Featured highlights",
   "startListening": "Start listening",
-  "books": "books"
+  "books": "books",
+  "clubs": "Clubs & rooms",
+  "hostedBy": "Hosted by",
+  "nextSession": "Next session",
+  "listeners": "listeners",
+  "joinClub": "Join",
+  "immersionRoom": "Immersion room",
+  "immersionSubtitle": "Micro journeys, breathing cues, and soft previews to prime your next listen.",
+  "startFlow": "Start flow",
+  "calmBreaths": "Calm breaths"
 }

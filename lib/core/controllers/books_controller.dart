@@ -35,4 +35,10 @@ class BooksController {
     _page = 0;
     loadInitial();
   }
+
+  void dispose() {
+    books.dispose();
+    isLoading.dispose();
+    isPaginating.dispose();
+  }
 }

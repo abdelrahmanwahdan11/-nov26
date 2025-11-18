@@ -2,6 +2,7 @@ import 'package:audiobook_ebooks/core/controllers/auth_controller.dart';
 import 'package:audiobook_ebooks/core/controllers/books_controller.dart';
 import 'package:audiobook_ebooks/core/controllers/comparison_controller.dart';
 import 'package:audiobook_ebooks/core/controllers/goals_controller.dart';
+import 'package:audiobook_ebooks/core/controllers/navigation_controller.dart';
 import 'package:audiobook_ebooks/core/controllers/theme_controller.dart';
 import 'package:audiobook_ebooks/core/localization/app_localizations.dart';
 import 'package:audiobook_ebooks/features/catalog/catalog_screen.dart';
@@ -33,12 +34,13 @@ class HomeShell extends StatefulWidget {
 }
 
 class _HomeShellState extends State<HomeShell> {
-  int _index = 0;
+  late final NavigationController _navController;
   late final List<Widget> _pages;
 
   @override
   void initState() {
     super.initState();
+    _navController = NavigationController();
     _pages = [
       HomeScreen(
         booksController: widget.booksController,
@@ -58,6 +60,12 @@ class _HomeShellState extends State<HomeShell> {
   }
 
   @override
+  void dispose() {
+    _navController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context);
     final items = [
@@ -69,58 +77,57 @@ class _HomeShellState extends State<HomeShell> {
 
     final isWide = MediaQuery.of(context).size.width >= 900;
 
-    final nav = isWide
-        ? NavigationRail(
-            selectedIndex: _index,
-            onDestinationSelected: (i) => setState(() => _index = i),
-            labelType: NavigationRailLabelType.all,
-            destinations: [
-              for (final item in items)
-                NavigationRailDestination(
-                  icon: Icon(item.icon),
-                  label: Text(item.label),
-                ),
-            ],
-          )
-        : BottomNavigationBar(
-            currentIndex: _index,
-            onTap: (i) => setState(() => _index = i),
-            items: [
-              for (final item in items)
-                BottomNavigationBarItem(
-                  icon: Icon(item.icon),
-                  label: item.label,
-                ),
-            ],
-          );
+    return ValueListenableBuilder<int>(
+      valueListenable: _navController.index,
+      builder: (context, index, _) {
+        final nav = isWide
+            ? NavigationRail(
+                selectedIndex: index,
+                onDestinationSelected: (i) => _navController.setIndex(i),
+                labelType: NavigationRailLabelType.all,
+                destinations: [
+                  for (final item in items)
+                    NavigationRailDestination(
+                      icon: Icon(item.icon),
+                      label: Text(item.label),
+                    ),
+                ],
+              )
+            : BottomNavigationBar(
+                currentIndex: index,
+                onTap: (i) => _navController.setIndex(i),
+                items: [
+                  for (final item in items)
+                    BottomNavigationBarItem(
+                      icon: Icon(item.icon),
+                      label: item.label,
+                    ),
+                ],
+              );
 
-    return Scaffold(
-      body: Row(
-        children: [
-          if (isWide) nav,
-          Expanded(
-            child: AnimatedSwitcher(
-              duration: 250.ms,
-              transitionBuilder: (child, animation) => FadeTransition(
-                opacity: animation,
-                child: SlideTransition(
-                  position: Tween<Offset>(
-                    begin: const Offset(.05, 0),
-                    end: Offset.zero,
-                  ).animate(animation),
-                  child: child,
+        return Scaffold(
+          body: Row(
+            children: [
+              if (isWide) nav,
+              Expanded(
+                child: PageView(
+                  controller: _navController.pageController,
+                  onPageChanged: _navController.handlePageChanged,
+                  children: [
+                    for (final page in _pages)
+                      AnimatedSwitcher(
+                        duration: 280.ms,
+                        switchInCurve: Curves.easeOut,
+                        child: page,
+                      ),
+                  ],
                 ),
               ),
-              child: IndexedStack(
-                key: ValueKey(_index),
-                index: _index,
-                children: _pages,
-              ),
-            ),
+            ],
           ),
-        ],
-      ),
-      bottomNavigationBar: isWide ? null : nav,
+          bottomNavigationBar: isWide ? null : nav,
+        );
+      },
     );
   }
 }

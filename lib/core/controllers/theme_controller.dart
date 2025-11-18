@@ -44,4 +44,8 @@ class ThemeController {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString(_keyLanguage, code);
   }
+
+  void dispose() {
+    preferences.dispose();
+  }
 }

@@ -38,6 +38,16 @@ class _HearAndReadAppState extends State<HearAndReadApp> {
   }
 
   @override
+  void dispose() {
+    _themeController.dispose();
+    _authController.dispose();
+    _booksController.dispose();
+    _comparisonController.dispose();
+    _goalsController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
       valueListenable: _themeController.preferences,
