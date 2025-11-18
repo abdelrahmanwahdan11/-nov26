@@ -1,9 +1,11 @@
 import 'package:audiobook_ebooks/data/models/achievement.dart';
 import 'package:audiobook_ebooks/data/models/app_notification.dart';
+import 'package:audiobook_ebooks/data/models/author_spotlight.dart';
 import 'package:audiobook_ebooks/data/models/book.dart';
 import 'package:audiobook_ebooks/data/models/chapter.dart';
 import 'package:audiobook_ebooks/data/models/curated_collection.dart';
 import 'package:audiobook_ebooks/data/models/download_item.dart';
+import 'package:audiobook_ebooks/data/models/journey_event.dart';
 import 'package:audiobook_ebooks/data/models/reading_stat.dart';
 import 'package:audiobook_ebooks/data/models/review.dart';
 
@@ -160,6 +162,82 @@ class DummyData {
       subtitle: 'Instrumental and low-dialogue picks.',
       coverUrl: 'https://picsum.photos/seed/collection3/800/600',
       tags: ['Productivity', 'Minimal', 'Loopable'],
+    ),
+  ];
+
+  static const journey = [
+    JourneyEvent(
+      id: 'morning-focus',
+      title: 'Morning Focus',
+      description: 'Finished a 20-minute focus block with Deep Focus mix.',
+      dateLabel: 'Today',
+      emphasis: 0.9,
+    ),
+    JourneyEvent(
+      id: 'shared-note',
+      title: 'Shared note',
+      description: 'Left a highlight on Fictional Odyssey chapter 3.',
+      dateLabel: 'Yesterday',
+      emphasis: 0.7,
+    ),
+    JourneyEvent(
+      id: 'week-streak',
+      title: '1-week streak',
+      description: 'Kept your 7-day streak alive with nightly listens.',
+      dateLabel: 'This week',
+      emphasis: 1,
+    ),
+    JourneyEvent(
+      id: 'new-genre',
+      title: 'New genre explored',
+      description: 'Tried two new Young Adult titles and loved one.',
+      dateLabel: 'Last week',
+      emphasis: 0.5,
+    ),
+  ];
+
+  static const authorSpotlights = [
+    AuthorSpotlight(
+      id: 'solana-reef',
+      name: 'Solana Reef',
+      tagline: 'Cozy sci-fi storyteller',
+      bio:
+          'Known for atmospheric worlds and whisper-soft narration, Solana mixes warmth with wonder.',
+      coverUrl: 'https://picsum.photos/seed/author1/900/600',
+      booksCount: 12,
+      highlights: [
+        'Breathes life into quiet characters',
+        'Award-winning "Silent Orbits" trilogy',
+        'Fan-favorite lullaby outros',
+      ],
+    ),
+    AuthorSpotlight(
+      id: 'amir-habib',
+      name: 'Amir Habib',
+      tagline: 'History with heart',
+      bio:
+          'Amir blends real events with intimate storytelling that keeps night listeners hooked.',
+      coverUrl: 'https://picsum.photos/seed/author2/900/600',
+      booksCount: 18,
+      highlights: [
+        'Narrates in both AR/EN with ease',
+        'Curates immersive soundscapes',
+        'Beloved for concise chapter recaps',
+      ],
+    ),
+    AuthorSpotlight(
+      id: 'lina-qureshi',
+      name: 'Lina Qureshi',
+      tagline: 'Mindful essays & poetry',
+      bio:
+          'Lina delivers reflective micro-essays perfect for calm morning routines and focus sprints.',
+      coverUrl: 'https://picsum.photos/seed/author3/900/600',
+      booksCount: 9,
+      highlights: [
+        'Creates bilingual companion notes',
+        'Chill, minimalist pacing',
+        'Popular "Breathe Deeper" series',
+      ],
     ),
   ];
 }

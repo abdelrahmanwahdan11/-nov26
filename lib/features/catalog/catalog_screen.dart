@@ -7,6 +7,7 @@ import 'package:audiobook_ebooks/core/widgets/ai_info_button.dart';
 import 'package:audiobook_ebooks/core/widgets/skeleton.dart';
 import 'package:audiobook_ebooks/data/models/book.dart';
 import 'package:audiobook_ebooks/features/book_detail/book_detail_screen.dart';
+import 'package:audiobook_ebooks/features/catalog/author_spotlight_screen.dart';
 import 'package:audiobook_ebooks/features/catalog/collections_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -68,6 +69,13 @@ class _CatalogScreenState extends State<CatalogScreen> {
               MaterialPageRoute(builder: (_) => const CollectionsScreen()),
             ),
             icon: const Icon(Icons.auto_awesome),
+          ),
+          IconButton(
+            tooltip: loc.translate('authorSpotlight'),
+            onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute(builder: (_) => const AuthorSpotlightScreen()),
+            ),
+            icon: const Icon(Icons.record_voice_over),
           ),
           const AiInfoButton()
         ],

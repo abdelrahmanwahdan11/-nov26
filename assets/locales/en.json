@@ -62,5 +62,12 @@
   "focusCopy": "Reduce distractions with calmer colors and haptics.",
   "resetToday": "Reset today",
   "searchHint": "Search books, authors, or moods...",
-  "collections": "Curated collections"
+  "collections": "Curated collections",
+  "journey": "Journey",
+  "journeySubtitle": "Your story so far",
+  "journeyHelper": "Moments, streaks, and highlights captured with gentle motion.",
+  "authorSpotlight": "Author spotlight",
+  "featuredHighlights": "Featured highlights",
+  "startListening": "Start listening",
+  "books": "books"
 }

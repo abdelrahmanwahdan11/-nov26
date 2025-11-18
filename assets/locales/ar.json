@@ -62,5 +62,12 @@
   "focusCopy": "قلل التشتيت بألوان هادئة واهتزازات بسيطة.",
   "resetToday": "إعادة ضبط اليوم",
   "searchHint": "ابحث عن الكتب أو المؤلفين أو الحالة...",
-  "collections": "مجموعات منسقة"
+  "collections": "مجموعات منسقة",
+  "journey": "الرحلة",
+  "journeySubtitle": "قصتك حتى الآن",
+  "journeyHelper": "لحظات وسلاسل وإنجازات مع حركة غنية.",
+  "authorSpotlight": "تسليط الضوء على المؤلفين",
+  "featuredHighlights": "أبرز النقاط",
+  "startListening": "ابدأ الاستماع",
+  "books": "كتب"
 }
