@@ -135,5 +135,21 @@
   "coachTitle": "المدرب",
   "coachHero": "روتينات لطيفة تناسب تركيزك",
   "coachSub": "اختر وصفة مدرب وأضف مهاماً صغيرة لتحافظ على الزخم.",
-  "microActions": "مهام صغيرة"
+  "microActions": "مهام صغيرة",
+  "communityStories": "قصص المجتمع",
+  "communityStoriesSubtitle": "اطّلع على ما يشاركه المستمعون الآن.",
+  "communityTrending": "رائج",
+  "communityFresh": "جديد",
+  "communityFocus": "تركيز",
+  "communityCalm": "هدوء",
+  "communityCta": "افتح المجتمع",
+  "ritualLab": "مختبر الطقوس",
+  "ritualLabSubtitle": "امزج الإشارات وصمم طقساً خاصاً بك.",
+  "ritualBlueprints": "قوالب جاهزة",
+  "ritualIdeas": "حائط الأفكار",
+  "ritualStart": "ابدأ الطقس",
+  "ritualSteps": "الخطوات",
+  "ritualTips": "نصائح المختبر",
+  "ritualTipEnergy": "ادمج السرد مع أنفاس هادئة لتحافظ على الطاقة.",
+  "ritualTipLength": "اجعل كل مقطع أقل من 12 دقيقة لذهن متيقظ."
 }

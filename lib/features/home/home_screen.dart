@@ -10,6 +10,7 @@ import 'package:audiobook_ebooks/data/dummy/dummy_data.dart';
 import 'package:audiobook_ebooks/data/models/book.dart';
 import 'package:audiobook_ebooks/features/book_detail/book_detail_screen.dart';
 import 'package:audiobook_ebooks/features/comparison/comparison_screen.dart';
+import 'package:audiobook_ebooks/features/home/community_feed_screen.dart';
 import 'package:audiobook_ebooks/features/home/daily_brief_screen.dart';
 import 'package:audiobook_ebooks/features/home/immersion_room_screen.dart';
 import 'package:audiobook_ebooks/features/home/mindful_moments_screen.dart';
@@ -17,6 +18,7 @@ import 'package:audiobook_ebooks/features/home/schedule_screen.dart';
 import 'package:audiobook_ebooks/features/library/highlights_screen.dart';
 import 'package:audiobook_ebooks/features/profile/notifications_screen.dart';
 import 'package:audiobook_ebooks/features/profile/learning_paths_screen.dart';
+import 'package:audiobook_ebooks/features/profile/ritual_lab_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
@@ -165,6 +167,26 @@ class _HomeScreenState extends State<HomeScreen> {
                             );
                           },
                         ),
+                        ActionChip(
+                          label: Text(loc.translate('communityStories')),
+                          avatar: const Icon(Icons.groups_2_outlined),
+                          onPressed: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                  builder: (_) => const CommunityFeedScreen()),
+                            );
+                          },
+                        ),
+                        ActionChip(
+                          label: Text(loc.translate('ritualLab')),
+                          avatar: const Icon(Icons.science_outlined),
+                          onPressed: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                  builder: (_) => const RitualLabScreen()),
+                            );
+                          },
+                        ),
                       ],
                     ),
                     const SizedBox(height: 12),
@@ -177,6 +199,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     _MindfulMomentsPeek(loc: loc),
                     const SizedBox(height: 12),
                     _LearningPathsPeek(loc: loc),
+                    const SizedBox(height: 12),
+                    _CommunityStoriesPeek(loc: loc),
+                    const SizedBox(height: 12),
+                    _RitualLabPeek(loc: loc),
                     const SizedBox(height: 20),
                     _sectionTitle(context, 'Good Morning'),
                     SizedBox(
@@ -904,6 +930,196 @@ class _LearningPathsPeek extends StatelessWidget {
         ),
       ),
     ).animate().fadeIn(duration: 280.ms).slide(begin: const Offset(0, .04));
+  }
+}
+
+class _CommunityStoriesPeek extends StatelessWidget {
+  const _CommunityStoriesPeek({required this.loc});
+
+  final AppLocalizations loc;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final stories = DummyData.communityStories.take(3).toList();
+    return Card(
+      elevation: 10,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(AppConstants.cardRadius),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(18),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Icon(Icons.groups_2_outlined, color: theme.colorScheme.primary),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Text(
+                    loc.translate('communityStories'),
+                    style: theme.textTheme.titleMedium,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 8),
+            Text(
+              loc.translate('communityStoriesSubtitle'),
+              style: theme.textTheme.bodySmall,
+            ),
+            const SizedBox(height: 12),
+            SizedBox(
+              height: 110,
+              child: ListView.separated(
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index) {
+                  final story = stories[index];
+                  return Container(
+                    width: 160,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(26),
+                      image: DecorationImage(
+                        image: NetworkImage(story.coverUrl),
+                        fit: BoxFit.cover,
+                        colorFilter: ColorFilter.mode(
+                          Colors.black.withOpacity(.35),
+                          BlendMode.darken,
+                        ),
+                      ),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(12),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          CircleAvatar(
+                            radius: 16,
+                            backgroundImage: NetworkImage(story.userAvatarUrl),
+                          ),
+                          const Spacer(),
+                          Text(
+                            story.userName,
+                            style: theme.textTheme.labelLarge
+                                ?.copyWith(color: Colors.white),
+                          ),
+                          Text(
+                            story.mood,
+                            style: theme.textTheme.labelSmall
+                                ?.copyWith(color: Colors.white70),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ).animate().fadeIn(duration: 300.ms).scale(begin: const Offset(.96, .96));
+                },
+                separatorBuilder: (_, __) => const SizedBox(width: 10),
+                itemCount: stories.length,
+              ),
+            ),
+            const SizedBox(height: 8),
+            Align(
+              alignment: AlignmentDirectional.centerEnd,
+              child: TextButton.icon(
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (_) => const CommunityFeedScreen()),
+                  );
+                },
+                icon: const Icon(Icons.arrow_forward),
+                label: Text(loc.translate('communityCta')),
+              ),
+            ),
+          ],
+        ),
+      ),
+    ).animate().fadeIn(duration: 300.ms).slide(begin: const Offset(0, .05));
+  }
+}
+
+class _RitualLabPeek extends StatelessWidget {
+  const _RitualLabPeek({required this.loc});
+
+  final AppLocalizations loc;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final blueprint = DummyData.ritualBlueprints.first;
+    return InkWell(
+      borderRadius: BorderRadius.circular(AppConstants.cardRadius),
+      onTap: () {
+        Navigator.of(context).push(
+          MaterialPageRoute(builder: (_) => const RitualLabScreen()),
+        );
+      },
+      child: Container(
+        padding: const EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(AppConstants.cardRadius),
+          gradient: LinearGradient(
+            colors: [
+              theme.colorScheme.primary.withOpacity(.85),
+              theme.colorScheme.secondary.withOpacity(.6),
+            ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              loc.translate('ritualLab'),
+              style: theme.textTheme.titleMedium
+                  ?.copyWith(color: Colors.white, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 6),
+            Text(
+              blueprint.title,
+              style: theme.textTheme.headlineSmall
+                  ?.copyWith(color: Colors.white, fontWeight: FontWeight.w700),
+            ),
+            const SizedBox(height: 4),
+            Text(
+              blueprint.description,
+              style:
+                  theme.textTheme.bodyMedium?.copyWith(color: Colors.white70),
+            ),
+            const SizedBox(height: 12),
+            Wrap(
+              spacing: 8,
+              runSpacing: 8,
+              children: [
+                for (final step in blueprint.steps.take(3))
+                  Chip(
+                    label: Text(step),
+                    backgroundColor: Colors.white.withOpacity(.15),
+                    labelStyle:
+                        theme.textTheme.labelMedium?.copyWith(color: Colors.white),
+                  ),
+              ],
+            ),
+            const SizedBox(height: 12),
+            Align(
+              alignment: AlignmentDirectional.centerEnd,
+              child: FilledButton.tonal(
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (_) => const RitualLabScreen()),
+                  );
+                },
+                style: FilledButton.styleFrom(
+                  backgroundColor: Colors.white.withOpacity(.2),
+                ),
+                child: Text(loc.translate('ritualStart')),
+              ),
+            ),
+          ],
+        ),
+      ),
+    ).animate().fadeIn(duration: 320.ms).slide(begin: const Offset(0, .05));
   }
 }
 

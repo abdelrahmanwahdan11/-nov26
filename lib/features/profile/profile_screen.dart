@@ -3,6 +3,7 @@ import 'package:audiobook_ebooks/core/controllers/navigation_controller.dart';
 import 'package:audiobook_ebooks/core/controllers/theme_controller.dart';
 import 'package:audiobook_ebooks/core/localization/app_localizations.dart';
 import 'package:audiobook_ebooks/features/library/downloads_center_screen.dart';
+import 'package:audiobook_ebooks/features/home/community_feed_screen.dart';
 import 'package:audiobook_ebooks/features/home/schedule_screen.dart';
 import 'package:audiobook_ebooks/features/profile/clubs_screen.dart';
 import 'package:audiobook_ebooks/features/profile/goals_screen.dart';
@@ -14,6 +15,7 @@ import 'package:audiobook_ebooks/features/profile/progress_hub_screen.dart';
 import 'package:audiobook_ebooks/features/profile/reading_stats_screen.dart';
 import 'package:audiobook_ebooks/features/profile/sessions_planner_screen.dart';
 import 'package:audiobook_ebooks/features/profile/coach_screen.dart';
+import 'package:audiobook_ebooks/features/profile/ritual_lab_screen.dart';
 import 'package:audiobook_ebooks/features/settings/settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -88,6 +90,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
             onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute(builder: (_) => const ScheduleScreen()),
+              );
+            },
+          ),
+          _ProfileAction(
+            title: loc.translate('communityStories'),
+            icon: Icons.groups_2_outlined,
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (_) => const CommunityFeedScreen()),
+              );
+            },
+          ),
+          _ProfileAction(
+            title: loc.translate('ritualLab'),
+            icon: Icons.science_outlined,
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (_) => const RitualLabScreen()),
               );
             },
           ),

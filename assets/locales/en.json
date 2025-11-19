@@ -135,5 +135,21 @@
   "coachTitle": "Coach",
   "coachHero": "Gentle routines tuned to your focus",
   "coachSub": "Pick a coach recipe, then add quick micro-actions to keep momentum.",
-  "microActions": "Micro-actions"
+  "microActions": "Micro-actions",
+  "communityStories": "Community stories",
+  "communityStoriesSubtitle": "See what other listeners are journaling right now.",
+  "communityTrending": "Trending",
+  "communityFresh": "Fresh",
+  "communityFocus": "Focus",
+  "communityCalm": "Calm",
+  "communityCta": "Open community",
+  "ritualLab": "Ritual lab",
+  "ritualLabSubtitle": "Blend cues to craft your own ritual.",
+  "ritualBlueprints": "Blueprints",
+  "ritualIdeas": "Idea wall",
+  "ritualStart": "Start ritual",
+  "ritualSteps": "Steps",
+  "ritualTips": "Lab tips",
+  "ritualTipEnergy": "Layer narration with breath cues for steady energy.",
+  "ritualTipLength": "Keep each block under 12 minutes for mindful focus."
 }

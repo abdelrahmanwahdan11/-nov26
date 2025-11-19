@@ -3,6 +3,7 @@ import 'package:audiobook_ebooks/data/models/app_notification.dart';
 import 'package:audiobook_ebooks/data/models/author_spotlight.dart';
 import 'package:audiobook_ebooks/data/models/book.dart';
 import 'package:audiobook_ebooks/data/models/chapter.dart';
+import 'package:audiobook_ebooks/data/models/community_story.dart';
 import 'package:audiobook_ebooks/data/models/curated_collection.dart';
 import 'package:audiobook_ebooks/data/models/download_item.dart';
 import 'package:audiobook_ebooks/data/models/daily_brief.dart';
@@ -17,6 +18,7 @@ import 'package:audiobook_ebooks/data/models/review.dart';
 import 'package:audiobook_ebooks/data/models/scheduled_event.dart';
 import 'package:audiobook_ebooks/data/models/learning_path.dart';
 import 'package:audiobook_ebooks/data/models/mindful_moment.dart';
+import 'package:audiobook_ebooks/data/models/ritual_blueprint.dart';
 
 class DummyData {
   static final List<Book> books = List.generate(
@@ -577,6 +579,110 @@ class DummyData {
       coverUrl: 'https://picsum.photos/seed/moment4/900/600',
       cues: ['Sit tall', 'Note one win', 'Share the vibe'],
     ),
+  ];
+
+  static const communityStories = [
+    CommunityStory(
+      id: 'cs1',
+      userName: 'Maya',
+      userAvatarUrl: 'https://picsum.photos/seed/community1/100/100',
+      coverUrl: 'https://picsum.photos/seed/communitycard1/600/400',
+      snippet:
+          'Stacked a 9-minute calm mix with a gratitude clip before sunrise. Energy stayed grounded all morning.',
+      mood: 'Calm',
+      minutes: 9,
+      likes: 214,
+      comments: 12,
+      timeAgo: '5m ago',
+    ),
+    CommunityStory(
+      id: 'cs2',
+      userName: 'Omar',
+      userAvatarUrl: 'https://picsum.photos/seed/community2/100/100',
+      coverUrl: 'https://picsum.photos/seed/communitycard2/600/400',
+      snippet:
+          'Mixed a sci-fi short with the breathing slider at 70%. Logged the best focus sprint yet.',
+      mood: 'Focus',
+      minutes: 14,
+      likes: 188,
+      comments: 20,
+      timeAgo: '20m ago',
+    ),
+    CommunityStory(
+      id: 'cs3',
+      userName: 'Lina',
+      userAvatarUrl: 'https://picsum.photos/seed/community3/100/100',
+      coverUrl: 'https://picsum.photos/seed/communitycard3/600/400',
+      snippet:
+          'Night drift playlist with soft rain + narrative whispers helped me fall asleep in 6 minutes.',
+      mood: 'Sleep',
+      minutes: 6,
+      likes: 301,
+      comments: 33,
+      timeAgo: '1h ago',
+    ),
+    CommunityStory(
+      id: 'cs4',
+      userName: 'Yasmin',
+      userAvatarUrl: 'https://picsum.photos/seed/community4/100/100',
+      coverUrl: 'https://picsum.photos/seed/communitycard4/600/400',
+      snippet:
+          'Turned highlights into a lunchtime recap for my club—instant inspiration and lively replies.',
+      mood: 'Community',
+      minutes: 11,
+      likes: 129,
+      comments: 15,
+      timeAgo: '2h ago',
+    ),
+  ];
+
+  static const ritualBlueprints = [
+    RitualBlueprint(
+      id: 'rb-sunrise',
+      title: 'Sunrise lift',
+      description: 'Soft light cues, journal check-in, and uplifting narration.',
+      focus: 'Calm',
+      durationMinutes: 12,
+      steps: [
+        '2m breath sync',
+        '6m inspiring chapter',
+        '2m gratitude jot',
+        '2m share a highlight',
+      ],
+    ),
+    RitualBlueprint(
+      id: 'rb-focus-surge',
+      title: 'Focus surge',
+      description: 'Intense yet gentle stack for getting into deep work.',
+      focus: 'Focus',
+      durationMinutes: 15,
+      steps: [
+        '3m breath ramp',
+        '8m sci-fi short',
+        '2m stretch + sip',
+        '2m log momentum',
+      ],
+    ),
+    RitualBlueprint(
+      id: 'rb-night-hush',
+      title: 'Night hush',
+      description: 'Slow narration, dim visuals, and sleep affirmations.',
+      focus: 'Sleep',
+      durationMinutes: 10,
+      steps: [
+        '2m body scan',
+        '5m cozy story',
+        '3m whisper mantra',
+      ],
+    ),
+  ];
+
+  static const ritualIdeas = [
+    'Sunlight check-in',
+    'Desk stretch reset',
+    'Slow coffee reflection',
+    'Community share prompt',
+    'Night gratitude ping',
   ];
 
   static const microTasks = [
