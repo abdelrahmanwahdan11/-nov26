@@ -185,6 +185,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         const Spacer(),
                         FilledButton(
                           onPressed: () {
+                            if (_page == _items.length - 1) {
+                              widget.onStart();
+                              return;
+                            }
                             final next = (_page + 1).clamp(0, _items.length - 1);
                             _controller.animateToPage(
                               next,

@@ -14,6 +14,7 @@ import 'package:audiobook_ebooks/data/models/live_session.dart';
 import 'package:audiobook_ebooks/data/models/highlight_note.dart';
 import 'package:audiobook_ebooks/data/models/reading_stat.dart';
 import 'package:audiobook_ebooks/data/models/review.dart';
+import 'package:audiobook_ebooks/data/models/scheduled_event.dart';
 
 class DummyData {
   static final List<Book> books = List.generate(
@@ -343,6 +344,41 @@ class DummyData {
       mood: 'Sleep wind-down',
       lengthLabel: '30m',
       coverUrl: 'https://picsum.photos/seed/session3/900/600',
+    ),
+  ];
+
+  static const scheduledEvents = [
+    ScheduledEvent(
+      id: 'sunrise-stack',
+      title: 'Sunrise stack',
+      window: 'Tomorrow · 6:30 AM',
+      subtitle: 'Breathing primer + mindful chapter to open the day.',
+      coverUrl: 'https://picsum.photos/seed/schedule1/900/600',
+      vibe: 'Calm focus',
+    ),
+    ScheduledEvent(
+      id: 'noon-dive',
+      title: 'Noon deep dive',
+      window: 'Tomorrow · 12:15 PM',
+      subtitle: 'Drop into a 20m immersion mix and quick chapter recap.',
+      coverUrl: 'https://picsum.photos/seed/schedule2/900/600',
+      vibe: 'Productivity',
+    ),
+    ScheduledEvent(
+      id: 'commute-companion',
+      title: 'Commute companion',
+      window: 'Fri · 5:40 PM',
+      subtitle: 'Soft narration with upbeat outro to reset after work.',
+      coverUrl: 'https://picsum.photos/seed/schedule3/900/600',
+      vibe: 'Reset',
+    ),
+    ScheduledEvent(
+      id: 'night-wind',
+      title: 'Night wind-down',
+      window: 'Fri · 10:05 PM',
+      subtitle: 'Cozy stories with gentle rain textures before sleep.',
+      coverUrl: 'https://picsum.photos/seed/schedule4/900/600',
+      vibe: 'Sleep',
     ),
   ];
 

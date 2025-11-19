@@ -12,7 +12,9 @@ import 'package:audiobook_ebooks/features/book_detail/book_detail_screen.dart';
 import 'package:audiobook_ebooks/features/comparison/comparison_screen.dart';
 import 'package:audiobook_ebooks/features/home/daily_brief_screen.dart';
 import 'package:audiobook_ebooks/features/home/immersion_room_screen.dart';
+import 'package:audiobook_ebooks/features/home/schedule_screen.dart';
 import 'package:audiobook_ebooks/features/library/highlights_screen.dart';
+import 'package:audiobook_ebooks/features/profile/notifications_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
@@ -74,7 +76,25 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(loc.translate('home')),
-        actions: const [AiInfoButton()],
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.notifications_active_outlined),
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (_) => const NotificationsScreen()),
+              );
+            },
+          ),
+          IconButton(
+            icon: const Icon(Icons.calendar_month),
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (_) => const ScheduleScreen()),
+              );
+            },
+          ),
+          const AiInfoButton(),
+        ],
       ),
       floatingActionButton: ValueListenableBuilder(
         valueListenable: comparisonController.selected,
@@ -116,6 +136,35 @@ class _HomeScreenState extends State<HomeScreen> {
                   controller: _scroll,
                   children: [
                     _FocusCard(goalsController: widget.goalsController),
+                    const SizedBox(height: 12),
+                    _ScheduleTeaser(loc: loc),
+                    const SizedBox(height: 12),
+                    Wrap(
+                      spacing: 8,
+                      runSpacing: 8,
+                      children: [
+                        ActionChip(
+                          label: Text(loc.translate('openInbox')),
+                          avatar: const Icon(Icons.mark_email_unread_outlined),
+                          onPressed: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                  builder: (_) => const NotificationsScreen()),
+                            );
+                          },
+                        ),
+                        ActionChip(
+                          label: Text(loc.translate('openSchedule')),
+                          avatar: const Icon(Icons.calendar_today_outlined),
+                          onPressed: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                  builder: (_) => const ScheduleScreen()),
+                            );
+                          },
+                        ),
+                      ],
+                    ),
                     const SizedBox(height: 12),
                     _DailyBriefTeaser(loc: loc),
                     const SizedBox(height: 12),
@@ -456,6 +505,89 @@ class _FocusCard extends StatelessWidget {
           ),
         ).animate().fadeIn(duration: 260.ms).slide(begin: const Offset(0, .05));
       },
+    );
+  }
+}
+
+class _ScheduleTeaser extends StatelessWidget {
+  const _ScheduleTeaser({required this.loc});
+
+  final AppLocalizations loc;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final session = DummyData.liveSessions.first;
+    return GestureDetector(
+      onTap: () {
+        Navigator.of(context).push(
+          MaterialPageRoute(builder: (_) => const ScheduleScreen()),
+        );
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(AppConstants.cardRadius),
+          gradient: LinearGradient(
+            colors: [
+              theme.colorScheme.primary.withOpacity(.12),
+              theme.colorScheme.surface,
+            ],
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: theme.shadowColor.withOpacity(.08),
+              blurRadius: 16,
+              offset: const Offset(0, 8),
+            )
+          ],
+        ),
+        padding: const EdgeInsets.all(18),
+        child: Row(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(18),
+              child: Image.network(
+                session.coverUrl,
+                width: 92,
+                height: 92,
+                fit: BoxFit.cover,
+              ),
+            ).animate().scale(begin: const Offset(.95, .95)),
+            const SizedBox(width: 14),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    loc.translate('todayPlan'),
+                    style: theme.textTheme.labelLarge,
+                  ),
+                  const SizedBox(height: 6),
+                  Text(
+                    session.title,
+                    style: theme.textTheme.titleMedium,
+                  ),
+                  const SizedBox(height: 6),
+                  Row(
+                    children: [
+                      Icon(Icons.access_time, size: 16, color: theme.hintColor),
+                      const SizedBox(width: 6),
+                      Text(session.timeLabel, style: theme.textTheme.labelMedium),
+                      const SizedBox(width: 12),
+                      Chip(
+                        visualDensity: VisualDensity.compact,
+                        label: Text(loc.translate('openSchedule')),
+                        backgroundColor: theme.colorScheme.primary.withOpacity(.12),
+                        labelStyle: theme.textTheme.labelMedium,
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            )
+          ],
+        ),
+      ).animate().fadeIn(duration: 250.ms).slide(begin: const Offset(0, .04)),
     );
   }
 }

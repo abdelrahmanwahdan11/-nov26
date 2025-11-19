@@ -3,10 +3,12 @@ import 'package:audiobook_ebooks/core/controllers/navigation_controller.dart';
 import 'package:audiobook_ebooks/core/controllers/theme_controller.dart';
 import 'package:audiobook_ebooks/core/localization/app_localizations.dart';
 import 'package:audiobook_ebooks/features/library/downloads_center_screen.dart';
+import 'package:audiobook_ebooks/features/home/schedule_screen.dart';
 import 'package:audiobook_ebooks/features/profile/clubs_screen.dart';
 import 'package:audiobook_ebooks/features/profile/goals_screen.dart';
 import 'package:audiobook_ebooks/features/profile/journey_screen.dart';
 import 'package:audiobook_ebooks/features/profile/achievements_showcase_screen.dart';
+import 'package:audiobook_ebooks/features/profile/notifications_screen.dart';
 import 'package:audiobook_ebooks/features/profile/progress_hub_screen.dart';
 import 'package:audiobook_ebooks/features/profile/reading_stats_screen.dart';
 import 'package:audiobook_ebooks/features/profile/sessions_planner_screen.dart';
@@ -70,6 +72,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
             subtitle: const Text('jane@example.com'),
           ),
           const SizedBox(height: 12),
+          _ProfileAction(
+            title: loc.translate('notificationCenter'),
+            icon: Icons.notifications_active_outlined,
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (_) => const NotificationsScreen()),
+              );
+            },
+          ),
+          _ProfileAction(
+            title: loc.translate('schedule'),
+            icon: Icons.calendar_month,
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (_) => const ScheduleScreen()),
+              );
+            },
+          ),
           _ProfileAction(
             title: loc.translate('readingStats'),
             icon: Icons.auto_graph,
