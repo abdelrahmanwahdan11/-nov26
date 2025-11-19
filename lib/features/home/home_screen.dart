@@ -12,9 +12,11 @@ import 'package:audiobook_ebooks/features/book_detail/book_detail_screen.dart';
 import 'package:audiobook_ebooks/features/comparison/comparison_screen.dart';
 import 'package:audiobook_ebooks/features/home/daily_brief_screen.dart';
 import 'package:audiobook_ebooks/features/home/immersion_room_screen.dart';
+import 'package:audiobook_ebooks/features/home/mindful_moments_screen.dart';
 import 'package:audiobook_ebooks/features/home/schedule_screen.dart';
 import 'package:audiobook_ebooks/features/library/highlights_screen.dart';
 import 'package:audiobook_ebooks/features/profile/notifications_screen.dart';
+import 'package:audiobook_ebooks/features/profile/learning_paths_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
@@ -171,6 +173,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     _ImmersionPreview(loc: loc),
                     const SizedBox(height: 12),
                     _HighlightsPeek(loc: loc),
+                    const SizedBox(height: 12),
+                    _MindfulMomentsPeek(loc: loc),
+                    const SizedBox(height: 12),
+                    _LearningPathsPeek(loc: loc),
                     const SizedBox(height: 20),
                     _sectionTitle(context, 'Good Morning'),
                     SizedBox(
@@ -767,6 +773,137 @@ class _HighlightsPeek extends StatelessWidget {
         ),
       ),
     ).animate().fadeIn(duration: 250.ms).slide(begin: const Offset(0, .04));
+  }
+}
+
+class _MindfulMomentsPeek extends StatelessWidget {
+  const _MindfulMomentsPeek({required this.loc});
+
+  final AppLocalizations loc;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final hero = DummyData.mindfulMoments.first;
+    return InkWell(
+      borderRadius: BorderRadius.circular(AppConstants.cardRadius),
+      onTap: () => Navigator.of(context).push(
+        MaterialPageRoute(builder: (_) => const MindfulMomentsScreen()),
+      ),
+      child: Container(
+        padding: const EdgeInsets.all(18),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(AppConstants.cardRadius),
+          gradient: LinearGradient(
+            colors: [
+              theme.colorScheme.tertiary.withOpacity(.2),
+              theme.colorScheme.primary.withOpacity(.08),
+            ],
+          ),
+        ),
+        child: Row(
+          children: [
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    loc.translate('mindfulMoments'),
+                    style: theme.textTheme.titleMedium
+                        ?.copyWith(fontWeight: FontWeight.w700),
+                  ),
+                  const SizedBox(height: 6),
+                  Text(
+                    loc.translate('mindfulMomentsHeadline'),
+                    style: theme.textTheme.bodySmall,
+                  ),
+                  const SizedBox(height: 10),
+                  Wrap(
+                    spacing: 6,
+                    children: hero.cues
+                        .take(3)
+                        .map(
+                          (cue) => Chip(
+                            label: Text(cue),
+                            visualDensity: VisualDensity.compact,
+                          ),
+                        )
+                        .toList(),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(width: 16),
+            Column(
+              children: [
+                Icon(Icons.self_improvement,
+                    color: theme.colorScheme.primary, size: 34),
+                const SizedBox(height: 6),
+                Text(hero.durationLabel, style: theme.textTheme.labelLarge),
+              ],
+            ),
+          ],
+        ),
+      ),
+    ).animate().fadeIn(duration: 260.ms).slide(begin: const Offset(0, .04));
+  }
+}
+
+class _LearningPathsPeek extends StatelessWidget {
+  const _LearningPathsPeek({required this.loc});
+
+  final AppLocalizations loc;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final hero = DummyData.learningPaths.first;
+    return Card(
+      elevation: 8,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(AppConstants.cardRadius),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(18.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Icon(Icons.route, color: theme.colorScheme.primary),
+                const SizedBox(width: 8),
+                Text(loc.translate('learningPaths'),
+                    style: theme.textTheme.titleMedium),
+              ],
+            ),
+            const SizedBox(height: 8),
+            Text(hero.title, style: theme.textTheme.titleLarge),
+            const SizedBox(height: 4),
+            Text(hero.subtitle, style: theme.textTheme.bodySmall),
+            const SizedBox(height: 12),
+            Row(
+              children: [
+                Expanded(
+                  child: LinearProgressIndicator(value: hero.progress),
+                ),
+                const SizedBox(width: 12),
+                Text('${(hero.progress * 100).round()}%'),
+              ],
+            ),
+            const SizedBox(height: 12),
+            Align(
+              alignment: Alignment.centerRight,
+              child: FilledButton(
+                onPressed: () => Navigator.of(context).push(
+                  MaterialPageRoute(builder: (_) => const LearningPathsScreen()),
+                ),
+                child: Text(loc.translate('resumePath')),
+              ),
+            )
+          ],
+        ),
+      ),
+    ).animate().fadeIn(duration: 280.ms).slide(begin: const Offset(0, .04));
   }
 }
 

@@ -15,6 +15,8 @@ import 'package:audiobook_ebooks/data/models/highlight_note.dart';
 import 'package:audiobook_ebooks/data/models/reading_stat.dart';
 import 'package:audiobook_ebooks/data/models/review.dart';
 import 'package:audiobook_ebooks/data/models/scheduled_event.dart';
+import 'package:audiobook_ebooks/data/models/learning_path.dart';
+import 'package:audiobook_ebooks/data/models/mindful_moment.dart';
 
 class DummyData {
   static final List<Book> books = List.generate(
@@ -463,6 +465,117 @@ class DummyData {
       subtitle: 'Pair a 90s recap with a fresh chapter to anchor the memory.',
       actionLabel: 'Add recap',
       illustrationUrl: 'https://picsum.photos/seed/coach3/900/600',
+    ),
+  ];
+
+  static const learningPaths = [
+    LearningPath(
+      id: 'focus-foundation',
+      title: 'Focus foundation',
+      subtitle: 'Blend mindful breath + highlight recap for 10 days.',
+      focus: 'focus',
+      progress: 0.45,
+      steps: [
+        '2m breath check-in',
+        '8m chapter dive',
+        'Mark a takeaway',
+        'Log a micro reflection',
+      ],
+      coverUrl: 'https://picsum.photos/seed/path1/900/600',
+      minutesPerDay: 12,
+      featured: true,
+      tags: ['Morning', 'Solo', 'Streak'],
+    ),
+    LearningPath(
+      id: 'calm-evenings',
+      title: 'Calm evenings',
+      subtitle: 'Wind down with soft narration and gentle journaling cues.',
+      focus: 'calm',
+      progress: 0.7,
+      steps: [
+        '5m body scan',
+        'Story chapter with dim visuals',
+        'Note gratitude highlight',
+      ],
+      coverUrl: 'https://picsum.photos/seed/path2/900/600',
+      minutesPerDay: 15,
+      featured: true,
+      tags: ['Night', 'Cozy', 'Breath'],
+    ),
+    LearningPath(
+      id: 'growth-lab',
+      title: 'Growth lab',
+      subtitle: 'Rotate two genres weekly and record insights.',
+      focus: 'growth',
+      progress: 0.25,
+      steps: [
+        'Pick a mentor book',
+        'Listen 15m/day',
+        'Share one quote',
+      ],
+      coverUrl: 'https://picsum.photos/seed/path3/900/600',
+      minutesPerDay: 20,
+      featured: false,
+      tags: ['Community', 'Clubs'],
+    ),
+    LearningPath(
+      id: 'reset-sprint',
+      title: 'Reset sprint',
+      subtitle: 'Mini detox with breathing cues and inspiring shorts.',
+      focus: 'calm',
+      progress: 0.9,
+      steps: [
+        '3m breathing arc',
+        '6m inspiration clip',
+        'Log mood shift',
+      ],
+      coverUrl: 'https://picsum.photos/seed/path4/900/600',
+      minutesPerDay: 9,
+      featured: false,
+      tags: ['Daytime', 'Quick'],
+    ),
+  ];
+
+  static const mindfulMoments = [
+    MindfulMoment(
+      id: 'sun-dial',
+      title: 'Sun dial reset',
+      description:
+          'Let warm synth pads lead a slow inhale/exhale while narrators whisper a grounding mantra.',
+      mood: 'Calm',
+      durationLabel: '4m',
+      coverUrl: 'https://picsum.photos/seed/moment1/900/600',
+      cues: ['Warm light', 'Slow inhale', 'Hold + exhale'],
+    ),
+    MindfulMoment(
+      id: 'pulse-tide',
+      title: 'Pulse tide boost',
+      description:
+          'A gentle metronome pairs with upbeat narration to lift afternoon slumps.',
+      mood: 'Focus',
+      durationLabel: '6m',
+      coverUrl: 'https://picsum.photos/seed/moment2/900/600',
+      cues: ['Tap to tempo', 'Smile cue', 'Quick stretch'],
+    ),
+    MindfulMoment(
+      id: 'starlit',
+      title: 'Starlit hush',
+      description:
+          'Dim textures, breath-counting, and a tender bedtime story preview.',
+      mood: 'Sleep',
+      durationLabel: '5m',
+      coverUrl: 'https://picsum.photos/seed/moment3/900/600',
+      cues: ['Count backwards', 'Wrap in blanket', 'Whisper mantra'],
+    ),
+    MindfulMoment(
+      id: 'fresh-page',
+      title: 'Fresh page spark',
+      description:
+          'Morning note-to-self, posture check, and a quote to set intentions.',
+      mood: 'Inspire',
+      durationLabel: '3m',
+      coverUrl: 'https://picsum.photos/seed/moment4/900/600',
+      cues: ['Sit tall', 'Note one win', 'Share the vibe'],
     ),
   ];
 

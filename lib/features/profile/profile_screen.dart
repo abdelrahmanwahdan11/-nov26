@@ -6,6 +6,7 @@ import 'package:audiobook_ebooks/features/library/downloads_center_screen.dart';
 import 'package:audiobook_ebooks/features/home/schedule_screen.dart';
 import 'package:audiobook_ebooks/features/profile/clubs_screen.dart';
 import 'package:audiobook_ebooks/features/profile/goals_screen.dart';
+import 'package:audiobook_ebooks/features/profile/learning_paths_screen.dart';
 import 'package:audiobook_ebooks/features/profile/journey_screen.dart';
 import 'package:audiobook_ebooks/features/profile/achievements_showcase_screen.dart';
 import 'package:audiobook_ebooks/features/profile/notifications_screen.dart';
@@ -116,6 +117,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 MaterialPageRoute(
                   builder: (_) => GoalsScreen(goalsController: widget.goalsController),
                 ),
+              );
+            },
+          ),
+          _ProfileAction(
+            title: loc.translate('learningPaths'),
+            icon: Icons.route,
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (_) => const LearningPathsScreen()),
               );
             },
           ),
